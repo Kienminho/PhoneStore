@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Active Account</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background-size: cover;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #loading {
+            display: none;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        #statusMessage {
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        #activateButton {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #activateButton:hover {
+            background-color: #2980b9;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <span class="id d-none">{{ id }}</span>
+    <div id="loading"></div>
+    <div id="statusMessage" style="color: {{isSuccessEq3 isSuccess 'green' 'red'}}; display: none;">{{message}}</div>
+
+
+
+
+</body>
+<script>
+
+    // Display loading spinner
+    document.getElementById('loading').style.display = 'block';
+
+    setTimeout(function () {
+
+        // Hide loading spinner
+        document.getElementById('loading').style.display = 'none';
+
+        // Display the status message
+        document.getElementById('statusMessage').style.display = 'block';
+
+    }, 3000);
+
+    const success = {{ isSuccess }}
+    setTimeout(() => {
+
+        const id = $('.id').text();
+        if (success) {
+            console.log(96);
+            window.location = `/auth/change_password/${id}`;
+        }
+    }, 3000)
+
+</script>
+
+</html>
