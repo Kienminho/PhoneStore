@@ -1,9 +1,9 @@
 const nodemailer = require("nodemailer");
 
-const sendMail = (email, activationToken) => {
+const sendMail = (email, activationToken, username) => {
   const html = `<h1>Chào bạn!</h1>
-  <p>Kích hoạt tài khoản của bạn tại đây.</p>
-  <p> Nhấp vào liên kết sau để kích hoạt tài khoản của bạn: http://localhost:3000/active/${activationToken}`;
+  <p>Tài khoản và mật khẩu của bạn: ${username}</p>
+  <p> Nhấp vào liên kết sau để kích hoạt tài khoản của bạn: http://localhost:3000/auth/active/${activationToken}`;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
