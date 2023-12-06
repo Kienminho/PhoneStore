@@ -16,16 +16,22 @@ const getUserNameByEmail = (email) => {
   return email.substring(0, index);
 };
 
-const createResponseModel = (code, message, data) => {
+const createResponseModel = (code, message, totalRecord = 1, data) => {
   return {
     statusCode: code,
     message: message,
+    totalRecord: totalRecord,
     data: data,
   };
 };
 
-const createSuccessResponseModel = (data) => {
-  return { statusCode: 200, message: "Successful", data: data };
+const createSuccessResponseModel = (totalRecord = 1, data) => {
+  return {
+    statusCode: 200,
+    message: "Successful",
+    totalRecord: totalRecord,
+    data: data,
+  };
 };
 
 const generateRandomToken = (length) => {

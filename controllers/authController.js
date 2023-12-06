@@ -8,6 +8,48 @@ const renderLogin = (req, res) => {
   return res.render("login", { layout: "authLayout" });
 };
 
+//xử lý login
+const handleLogin = async (req, res) => {
+  const { username, password } = req.body;
+  const existUser = await User.findOne({ username: username });
+  if (!existUser || existUser === null || existUser.activated === false) {
+    return res.json(
+      Common.createResponseModel(
+        404,
+        "Nhân viên chưa đăng kí hoặc chưa được kích hoạt, vui lòng thông báo lại với admin.",
+        false
+      )
+    );
+  }
+
+  // so sánh mật khẩu
+  const match = await bcrypt.compare(password, existUser.password);
+  if (match) {
+    if (existUser.firstLogin) {
+      return res.json(
+        Common.createResponseModel(
+          304,
+          "Lần đăng nhập đầu tiên, vui lòng đổi mật khẩu để tiếp tục truy cập hệ thống",
+          {
+            urlRedirect: "/auth/change_password",
+            token: existUser.activationToken,
+          }
+        )
+      );
+    }
+
+    // khởi tạo session và cookie
+    req.session.fullName = existUser.fullName;
+    res.cookie("fullname", existUser.fullName);
+    req.session.isLogin = true;
+
+    //trả thông tin về clients
+    return res.json(
+      Common.createSuccessResponseModel({ urlRedirect: "/home" })
+    );
+  }
+};
+
 // xử lý đăng ký
 const handleRegister = async (req, res) => {
   const { fullName, email } = req.body;
@@ -105,6 +147,7 @@ const handleChangePassword = async (req, res) => {
 
 module.exports = {
   renderLogin: renderLogin,
+  handleLogin: handleLogin,
   handleRegister: handleRegister,
   handleActive: handleActive,
   renderChangePassword: renderChangePassword,

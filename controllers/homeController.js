@@ -1,5 +1,5 @@
 const renderHome = (req, res) => {
-  return res.render("changePassword", { layout: "authLayout" });
+  return res.render("login", { layout: "authLayout" });
 };
 
 module.exports = {
