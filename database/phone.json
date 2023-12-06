@@ -1,0 +1,301 @@
+{
+    "iPhone 11 Series": [
+        {
+          "id": 1,
+          "ten": "iPhone 11 128GB | Chính hãng VN/A ",
+          "manHinh":"6.1 inches",
+          "ram": "4 GB",
+          "rom": "128 GB",
+          "gia": 12190000,
+          "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+          "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11-128gb.png"
+        },
+        {
+          "id": 2,
+          "ten": "iPhone 11 64GB | Chính hãng VN/A ",
+          "manHinh":"6.1 inches",
+          "ram": "4 GB",
+          "rom": "64 GB",
+          "gia": 12190000,
+          "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+          "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+        }
+    ],
+    "iPhone 12 Series": [
+      {
+        "id": 1,
+        "ten": "iPhone 12 mini 256GB | Chính hãng VN/A ",
+        "manHinh":"5.4 inches",
+        "ram": "4 GB",
+        "rom": "128 GB",
+        "gia": 10990000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-12-mini_1_2.png"
+      },
+      {
+        "id": 2,
+        "ten": "iPhone 12 Pro Max 256GB | Chính hãng VN/A ",
+        "manHinh":"6.7 inches",
+        "ram": "6 GB",
+        "rom": "256 GB",
+        "gia": 27590000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+      },
+      {
+        "id": 3,
+        "ten": "iPhone 12 Pro 256GB | Chính hãng VN/A ",
+        "manHinh":"6.1 inches",
+        "ram": "6 GB",
+        "rom": "256 GB",
+        "gia": 24990000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+      },
+      {
+        "id": 4,
+        "ten": "iPhone 12 Pro 128GB | Chính hãng VN/A ",
+        "manHinh":"6.1 inches",
+        "ram": "6 GB",
+        "rom": "128 GB",
+        "gia": 24990000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+      },
+      {
+        "id": 5,
+        "ten": "iPhone 12 mini 64GB | Chính hãng VN/A ",
+        "manHinh":"5.4 inches",
+        "ram": "4 GB",
+        "rom": "64 GB",
+        "gia": 9990000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+      },
+      {
+        "id": 6,
+        "ten": "iPhone 12 128GB | Chính hãng VN/A ",
+        "manHinh":"6.1 inches",
+        "ram": "4 GB",
+        "rom": "128 GB",
+        "gia": 14190000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+      },
+      {
+        "id": 7,
+        "ten": "iPhone 12 Pro Max 128GB | Chính hãng VN/A ",
+        "manHinh":"6.7 inches",
+        "ram": "6 GB",
+        "rom": "128 GB",
+        "gia": 23490000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+      },
+      {
+        "id": 8,
+        "ten": "iPhone 12 64GB | Chính hãng VN/A ",
+        "manHinh":"6.1 inches",
+        "ram": "4 GB",
+        "rom": "64 GB",
+        "gia": 11790000,
+        "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+        "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+      }
+  ],
+  "iPhone 13 Series": [
+    {
+      "id": 1,
+      "ten": "iPhone 13 128GB | Chính hãng VN/A ",
+      "manHinh":"6.1 inches",
+      "ram": "4 GB",
+      "rom": "128 GB",
+      "gia": 15890000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11-128gb.png"
+    },
+    {
+      "id": 2,
+      "ten": "iPhone 13 pro Max 128GB | Chính hãng VN/A ",
+      "manHinh":"6.7 inches",
+      "ram": "6 GB",
+      "rom": "128 GB",
+      "gia": 22990000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 3,
+      "ten": "iPhone 13 pro Max 256GB | Chính hãng VN/A ",
+      "manHinh":"6.7 inches",
+      "ram": "6 GB",
+      "rom": "256 GB",
+      "gia": 23990000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 4,
+      "ten": "iPhone 13 pro 128GB | Chính hãng VN/A ",
+      "manHinh":"6.1 inches",
+      "ram": "6 GB",
+      "rom": "128 GB",
+      "gia": 21990000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 5,
+      "ten": "iPhone 13 mini 128GB | Chính hãng VN/A ",
+      "manHinh":"5.4 inches",
+      "ram": "4 GB",
+      "rom": "128 GB",
+      "gia": 17490000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 6,
+      "ten": "iPhone 13 512GB | Chính hãng VN/A ",
+      "manHinh":"6.1 inches",
+      "ram": "4 GB",
+      "rom": "512 GB",
+      "gia": 25500000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 7,
+      "ten": "iPhone 13 Pro 256GB | Chính hãng VN/A ",
+      "manHinh":"6.1 inches",
+      "ram": "6 GB",
+      "rom": "256 GB",
+      "gia": 24490000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 8,
+      "ten":"iPhone 13 256GB | Chính hãng VN/A ",
+      "manHinh":"6.1 inches",
+      "ram": "4 GB",
+      "rom": "256 GB",
+      "gia": 19990000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 9,
+      "ten":"iPhone 13 Pro Max 512GB | Chính hãng VN/A ",
+      "manHinh":"6.7 inches",
+      "ram": "6 GB",
+      "rom": "512 GB",
+      "gia": 25990000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    },
+    {
+      "id": 10,
+      "ten":"iPhone 13 Pro 1TB | Chính hãng VN/A ",
+      "manHinh":"6.1 inches",
+      "ram": "6 GB",
+      "rom": "1 TB",
+      "gia": 25990000,
+      "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+      "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+    }
+],
+"iPhone 14 Series": [
+  {
+    "id": 1,
+    "ten": "iPhone 14 Pro Max 128GB | Chính hãng VN/A ",
+    "manHinh":"6.7 inches",
+    "ram": "6 GB",
+    "rom": "128 GB",
+    "gia": 27190000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11-128gb.png"
+  },
+  {
+    "id": 2,
+    "ten": "iPhone 14 Pro 128GB | Chính hãng VN/A ",
+    "manHinh":"6.1 inches",
+    "ram": "6 GB",
+    "rom": "128 GB",
+    "gia": 24690000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  },
+  {
+    "id": 3,
+    "ten": "iPhone 14 128GB | Chính hãng VN/A ",
+    "manHinh":"6.1 inches",
+    "ram": "6 GB",
+    "rom": "128 GB",
+    "gia": 18490000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  }
+  ,
+  {
+    "id": 4,
+    "ten": "iPhone 14 Pro Max 256GB | Chính hãng VN/A ",
+    "manHinh":"6.7 inches",
+    "ram": "6 GB",
+    "rom": "256 GB",
+    "gia": 29990000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  },
+  {
+    "id": 5,
+    "ten": "iPhone 14 Plus 128GB | Chính hãng VN/A ",
+    "manHinh":"6.7 inches",
+    "ram": "6 GB",
+    "rom": "128 GB",
+    "gia": 21490000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  },
+  {
+    "id": 6,
+    "ten": "iPhone 14 Pro 256GB | Chính hãng VN/A ",
+    "manHinh":"6.1 inches",
+    "ram": "6 GB",
+    "rom": "256 GB",
+    "gia": 26990000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  },
+  {
+    "id": 7,
+    "ten": "iPhone 14 Pro Max 512GB | Chính hãng VN/A ",
+    "manHinh":"6.7 inches",
+    "ram": "6 GB",
+    "rom": "512 GB",
+    "gia": 35190000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  },
+  {
+    "id": 8,
+    "ten": "iPhone 14 256GB | Chính hãng VN/A ",
+    "manHinh":"6.1 inches",
+    "ram": "6 GB",
+    "rom": "256 GB",
+    "gia": 21990000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  },
+  {
+    "id": 9,
+    "ten": "iPhone 14 Plus 512GB | Chính hãng VN/A ",
+    "manHinh":"6.7 inches",
+    "ram": "6 GB",
+    "rom": "512 GB",
+    "gia": 25490000,
+    "thongTinSanPham": "Máy mới 100% , chính hãng Apple Việt Nam.Thân máy, cáp USB-C to Lightning.1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple. Giá sản phẩm đã bao gồm VAT",
+    "linkAnh": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
+  }
+]
+}
