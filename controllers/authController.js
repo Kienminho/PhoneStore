@@ -4,6 +4,18 @@ const User = require("../models/Users");
 const Common = require("../common/Common");
 const Mail = require("../common/sendMail");
 
+const checkPermission = (req, res, next) => {
+  if (req.session.permission !== "admin") {
+    return res.json(
+      Common.createResponseModel(
+        403,
+        "Bạn không có quyền truy cập hệ thống này",
+        false
+      )
+    );
+  }
+};
+
 const renderLogin = (req, res) => {
   return res.render("login", { layout: "authLayout" });
 };
@@ -41,11 +53,13 @@ const handleLogin = async (req, res) => {
     // khởi tạo session và cookie
     req.session.fullName = existUser.fullName;
     res.cookie("fullname", existUser.fullName);
+    res.cookie("permission", existUser.role);
     req.session.isLogin = true;
+    req.session.permission = existUser.role;
 
     //trả thông tin về clients
     return res.json(
-      Common.createSuccessResponseModel({ urlRedirect: "/home" })
+      Common.createSuccessResponseModel(0, { urlRedirect: "/home" })
     );
   }
 };
@@ -152,4 +166,5 @@ module.exports = {
   handleActive: handleActive,
   renderChangePassword: renderChangePassword,
   handleChangePassword: handleChangePassword,
+  checkPermission: checkPermission,
 };

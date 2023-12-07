@@ -16,11 +16,11 @@ const getUserNameByEmail = (email) => {
   return email.substring(0, index);
 };
 
-const createResponseModel = (code, message, totalRecord = 1, data) => {
+const createResponseModel = (code, message, data) => {
   return {
     statusCode: code,
     message: message,
-    totalRecord: totalRecord,
+    totalRecord: 0,
     data: data,
   };
 };
