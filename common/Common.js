@@ -20,12 +20,18 @@ const createResponseModel = (code, message, data) => {
   return {
     statusCode: code,
     message: message,
+    totalRecord: 0,
     data: data,
   };
 };
 
-const createSuccessResponseModel = (data) => {
-  return { statusCode: 200, message: "Successful", data: data };
+const createSuccessResponseModel = (totalRecord = 1, data) => {
+  return {
+    statusCode: 200,
+    message: "Successful",
+    totalRecord: totalRecord,
+    data: data,
+  };
 };
 
 const generateRandomToken = (length) => {

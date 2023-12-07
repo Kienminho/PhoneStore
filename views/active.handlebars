@@ -43,20 +43,6 @@
             z-index: 2;
         }
 
-        #activateButton {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #activateButton:hover {
-            background-color: #2980b9;
-        }
-
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -99,7 +85,7 @@
         const id = $('.id').text();
         if (success) {
             console.log(96);
-            window.location = `/auth/change_password/${id}`;
+            window.location = `/auth/login`;
         }
     }, 3000)
 
