@@ -311,7 +311,7 @@
   <div class="content-backdrop fade"></div>
 </div>
 <!-- Content wrapper -->
-<!-- model add product -->
+<!-- modal add product -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -356,7 +356,8 @@
           </div>
           <div class="mb-3">
             <label for="description">Mô tả</label>
-            <input class="form-control" type="text" placeholder="Nhập mô tả" id="description" name="description">
+            <input class="form-control" type="text" placeholder="Nhập mô tả" id="description-product"
+              name="description">
           </div>
           <div class="mb-3">
             <label for="category">Danh mục</label>
@@ -366,6 +367,7 @@
               <option value="iPhone 12 Series">iPhone 12 Series</option>
               <option value="iPhone 13 Series">iPhone 13 Series</option>
               <option value="iPhone 14 Series">iPhone 14 Series</option>
+              <option value="iPhone 14 Series">iPhone 15 Series</option>
             </select>
           </div>
         </form>
@@ -378,11 +380,88 @@
   </div>
 </div>
 
+<!-- modal update product --->
+<div class="modal fade" id="update-product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-product-modal-label">Cập nhật sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="from-update-product" enctype="multipart/form-data">
+          <input class="form-control d-none" type="number" id="bar-code" name="barCode">
+          <div class="mb-3">
+            <label for="product-name">Tên sản phẩm</label>
+            <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" id="product-name-update"
+              name="productNameUpdate">
+          </div>
+          <div class="mb-3">
+            <label for="product-images">Ảnh sản phẩm</label>
+            <div class="input-group">
+              <input type="file" class="form-control" id="product-image-update" name="productImageUpdate"
+                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="price">Giá nhập sản phẩm</label>
+            <input class="form-control" type="number" placeholder="Nhập giá nhập" id="import-price-update"
+              name="importPriceUpdate">
+          </div>
+          <div class="mb-3">
+            <label for="price">Giá bán sản phẩm</label>
+            <input class="form-control" type="number" placeholder="Nhập giá bán" id="sale-price-update"
+              name="salePriceUpdate">
+          </div>
+          <div class="mb-3">
+            <label for="price">Ram</label>
+            <input class="form-control" type="number" placeholder="Nhập cấu hình RAM" id="ram-update" name="ramUpdate">
+          </div>
+          <div class="mb-3">
+            <label for="price">Rom</label>
+            <input class="form-control" type="number" placeholder="Nhập cấu hình ROM" id="rom-update" name="romUpdate">
+          </div>
+          <div class="mb-3">
+            <label for="saleNumber">Số lượng đã bán</label>
+            <input class="form-control" type="number" placeholder="Nhập số lượng đã bán" id="sale-number-update"
+              name="saleNumber">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Huỷ </button>
+      <button type="button" class="btn-add-product btn btn-primary pe-auto" onclick="confirmUpdateProduct()"> Cập nhật
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete-->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xoá sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xoá sản phẩm này không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-danger" onclick="confirmDeleted()">Xoá</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast message --->
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
   <div id="liveToast" class="bg-success text-white toast hide" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div class="toast-body">
-        Xin ch
       </div>
       <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
         aria-label="Close"></button>

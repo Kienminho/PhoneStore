@@ -34,6 +34,15 @@ const createSuccessResponseModel = (totalRecord = 1, data) => {
   };
 };
 
+const createErrorResponseModel = (totalRecord = 0, data = false) => {
+  return {
+    statusCode: 404,
+    message: "Failed",
+    totalRecord: totalRecord,
+    data: data,
+  };
+};
+
 const generateRandomToken = (length) => {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -54,4 +63,5 @@ module.exports = {
   createResponseModel: createResponseModel,
   createSuccessResponseModel: createSuccessResponseModel,
   generateRandomToken: generateRandomToken,
+  createErrorResponseModel: createErrorResponseModel,
 };

@@ -8,5 +8,11 @@ routes.post(
   apiController.upload.single("productImage"),
   apiController.addProduct
 );
+routes.delete("/products/delete/:id", apiController.deleteProduct);
+routes.put(
+  "/products/update-product",
+  apiController.upload.single("productImageUpdate"),
+  apiController.updateProduct
+);
 
 module.exports = routes;
