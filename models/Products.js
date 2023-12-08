@@ -16,6 +16,8 @@ const productSchema = new mongoose.Schema({
   imageLink: { type: String, required: true },
   saleNumber: { type: Number, required: true },
   creationDate: { type: Date, required: true },
+  updatedDate: { type: Date, required: false },
+  isDeleted: { type: Boolean, required: true },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "categories",

@@ -7,14 +7,23 @@ const salePrice = $("#sale-price");
 const size = $("#size");
 const ram = $("#ram");
 const rom = $("#rom");
-const description = $("#description");
+const description = $("#description-product");
 const category = $("#category");
+const deletedModal = $("#delete-modal");
+const updateModal = $("#update-product-modal");
+
+let tr;
+let barCode;
+
 //call api product
-fetch("/api/products/get-all-products")
-  .then((res) => res.json())
-  .then((res) => {
-    displayProduct(res.data);
-  });
+fetchData();
+function fetchData() {
+  fetch("/api/products/get-all-products")
+    .then((res) => res.json())
+    .then((res) => {
+      displayProduct(res.data);
+    });
+}
 
 //thêm sản phẩm
 function addProduct() {
@@ -24,6 +33,7 @@ function addProduct() {
       productImage.val(),
       importPrice.val(),
       salePrice.val(),
+      size.val(),
       ram.val(),
       rom.val(),
       description.val(),
@@ -60,10 +70,10 @@ function displayProduct(arr) {
   tbody.empty();
   arr.map((p) => {
     let html = `<tr>
-    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${
+    <td><i class="bar-code fab fa-angular fa-lg text-danger me-3"></i> <strong class= "bar-code">${
       p.barCode
     }</strong></td>
-    <td>${p.name}</td>
+    <td class= "name">${p.name}</td>
     <td>
       <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
         <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
@@ -86,26 +96,28 @@ function displayProduct(arr) {
         </li>
       </ul>
     </td>
-    <td>ROM: ${p.rom}, RAM: ${p.ram}</td>
+    <td class="config">ROM: ${p.rom}, RAM: ${p.ram}</td>
     <td>${new Date(p.creationDate).toLocaleDateString("vi-VN")}</td>
-    <td>${Number(p.importPrice).toLocaleString("vi", {
+    <td class="import-price">${Number(p.importPrice).toLocaleString("vi", {
       style: "currency",
       currency: "VND",
     })}</td>
-    <td>${Number(p.priceSale).toLocaleString("vi", {
+    <td class="sale-price">${Number(p.priceSale).toLocaleString("vi", {
       style: "currency",
       currency: "VND",
     })}</td>
-    <td>${p.categoryName}</td>
-    <td><span class="badge bg-label-primary me-1">${p.saleNumber}</span></td>
+    <td class="category">${p.categoryName}</td>
+    <td><span class="badge bg-label-primary me-1 sale-number">${
+      p.saleNumber
+    }</span></td>
     <td>
       <div class="dropdown">
         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
           <i class="bx bx-dots-vertical-rounded"></i>
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-          <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+          <a class="dropdown-item" href="javascript:void(0);" onclick="updateProduct(this)"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+          <a class="dropdown-item" href="javascript:void(0);" onclick="deletedProduct(this)"><i class="bx bx-trash me-1"></i> Xoá</a>
         </div>
       </div>
     </td>
@@ -116,10 +128,10 @@ function displayProduct(arr) {
 
 function displayOneProduct(p) {
   let html = `<tr>
-    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${
+    <td><i class="bar-code fab fa-angular fa-lg text-danger me-3"></i> <strong class= "bar-code">${
       p.barCode
     }</strong></td>
-    <td>${p.name}</td>
+    <td class="name">${p.name}</td>
     <td>
       <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
         <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
@@ -142,26 +154,28 @@ function displayOneProduct(p) {
         </li>
       </ul>
     </td>
-    <td>ROM: ${p.rom}, RAM: ${p.ram}</td>
+    <td class="config">ROM: ${p.rom} GB, RAM: ${p.ram} GB</td>
     <td>${new Date(p.creationDate).toLocaleDateString("vi-VN")}</td>
-    <td>${Number(p.importPrice).toLocaleString("vi", {
+    <td class="import-price">${Number(p.importPrice).toLocaleString("vi", {
       style: "currency",
       currency: "VND",
     })}</td>
-    <td>${Number(p.priceSale).toLocaleString("vi", {
+    <td class="sale-price">${Number(p.priceSale).toLocaleString("vi", {
       style: "currency",
       currency: "VND",
     })}</td>
-    <td>${p.categoryName}</td>
-    <td><span class="badge bg-label-primary me-1">${p.saleNumber}</span></td>
+    <td class="category">${p.categoryName}</td>
+    <td ><span class="badge bg-label-primary me-1 sale-number">${
+      p.saleNumber
+    }</span></td>
     <td>
       <div class="dropdown">
         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
           <i class="bx bx-dots-vertical-rounded"></i>
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-          <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+        <a class="dropdown-item" href="javascript:void(0);" onclick="updateProduct(this)"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+        <a class="dropdown-item" href="javascript:void(0);" onclick="deletedProduct(this)"><i class="bx bx-trash me-1"></i> Xoá</a>
         </div>
       </div>
     </td>
@@ -199,22 +213,109 @@ function validateData(
   size,
   ram,
   rom,
-  description,
-  category
+  descriptions,
+  categorys
 ) {
+  console.log(categorys);
   if (
     productName === "" ||
     productImage === "" ||
     importPrice === 0 ||
     salePrice === 0 ||
     size === "" ||
-    ram === 0 ||
-    rom === 0 ||
-    description === "" ||
-    category === ""
+    ram === null ||
+    rom === null ||
+    descriptions === "" ||
+    categorys === ""
   ) {
     showToast("Nhập đủ thông tin sản phẩm để thêm", false);
     return false;
   }
   return true;
+}
+
+function deletedProduct(element) {
+  $(deletedModal).modal("show");
+  tr = $(element).closest("tr");
+  barCode = $(tr).find(".bar-code").text();
+}
+
+function confirmDeleted() {
+  fetch(`/api/products/delete/${barCode}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.statusCode === 200) {
+        $(deletedModal).modal("hide");
+        showToast(res.message, true);
+        $(tr).remove();
+      } else {
+        $(deletedModal).modal("hide");
+        showToast(res.message, false);
+      }
+    });
+}
+
+function updateProduct(element) {
+  tr = $(element).closest("tr");
+  $("#bar-code").val(parseInt($(tr).find(".bar-code").text()));
+  $("#product-name-update").val($(tr).find(".name").text());
+  const config = extractNumbers($(tr).find(".config").text());
+  $("#ram-update").val(parseInt(config[1]));
+  $("#rom-update").val(parseInt(config[0]));
+  $("#import-price-update").val(
+    convertCurrencyStringToNumber($(tr).find(".import-price").text())
+  );
+  $("#sale-price-update").val(
+    convertCurrencyStringToNumber($(tr).find(".sale-price").text())
+  );
+  $("#sale-number-update").val(parseInt($(tr).find(".sale-number").text()));
+
+  $(updateModal).modal("show");
+}
+
+function confirmUpdateProduct() {
+  const form = document.getElementById("from-update-product");
+  const formData = new FormData(form);
+
+  $.ajax({
+    url: "/api/products/update-product",
+    type: "PUT",
+    processData: false,
+    contentType: false,
+    data: formData,
+    success: function (data) {
+      // Handle success
+      if (data.statusCode === 200) {
+        //ẩn modal
+        fetchData();
+        $("#update-product-modal").modal("hide");
+        showToast(data.message, true);
+      } else {
+        $("#update-product-modal").modal("hide");
+        showToast(data.message, false);
+      }
+    },
+    error: function (error) {
+      // Handle error
+      console.error("Error:", error);
+    },
+  });
+}
+
+//hàm lấy cắt chuỗi để lấy ram và rom
+function extractNumbers(str) {
+  const regex = /\b\d+\b/g;
+  const matches = str.match(regex);
+
+  return matches ? matches.map(Number) : null;
+}
+
+//convert string to number
+function convertCurrencyStringToNumber(currencyString) {
+  const numericString = currencyString.replace(/[^\d]/g, "");
+  const result = parseInt(numericString, 10);
+
+  return isNaN(result) ? null : result;
 }

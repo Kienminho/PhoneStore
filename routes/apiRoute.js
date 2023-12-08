@@ -19,5 +19,11 @@ routes.post(
 	"/customer/get-invoice-detail",
 	apiController.getCustomerInvoiceDetail
 );
+routes.delete("/products/delete/:id", apiController.deleteProduct);
+routes.put(
+  "/products/update-product",
+  apiController.upload.single("productImageUpdate"),
+  apiController.updateProduct
+);
 
 module.exports = routes;
