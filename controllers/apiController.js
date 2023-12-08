@@ -185,7 +185,6 @@ const getCustomerInvoiceDetail = async (req, res) => {
 	try {
 		const invoice = await Invoice.findOne({
 			_id: req.body.invoiceId,
-			customer: req.body.customerId,
 		})
 			.populate("customer", "fullName")
 			.populate("salesStaff", "fullName");

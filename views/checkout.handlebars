@@ -211,142 +211,6 @@
 
 	<div class="content-backdrop fade"></div>
 </div>
-<!-- Content wrapper -->
-<!-- model add product -->
-<div
-	class="modal fade"
-	id="addProductModal"
-	tabindex="-1"
-	aria-labelledby="exampleModalLabel"
-	aria-hidden="true"
->
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="add-product-modal-label">Thêm sản phẩm</h5>
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="modal"
-					aria-label="Close"
-				></button>
-			</div>
-			<div class="modal-body">
-				<form id="from-add-product" enctype="multipart/form-data">
-					<div class="mb-3">
-						<label for="product-name">Tên sản phẩm</label>
-						<input
-							class="form-control"
-							type="text"
-							placeholder="Nhập tên sản phẩm"
-							id="product-name"
-							name="productName"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="product-images">Ảnh sản phẩm</label>
-						<div class="input-group">
-							<input
-								type="file"
-								class="form-control"
-								id="product-image"
-								name="productImage"
-								aria-describedby="inputGroupFileAddon04"
-								aria-label="Upload"
-							/>
-
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="price">Giá nhập sản phẩm</label>
-						<input
-							class="form-control"
-							type="number"
-							placeholder="Nhập giá nhập"
-							id="import-price"
-							name="importPrice"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="price">Giá bán sản phẩm</label>
-						<input
-							class="form-control"
-							type="number"
-							placeholder="Nhập giá bán"
-							id="sale-price"
-							name="salePrice"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="size">Kích thước</label>
-						<input
-							class="form-control"
-							type="text"
-							placeholder="Nhập kích thước"
-							id="size"
-							name="size"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="price">Ram</label>
-						<input
-							class="form-control"
-							type="number"
-							placeholder="Nhập cấu hình RAM"
-							id="ram"
-							name="ram"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="price">Rom</label>
-						<input
-							class="form-control"
-							type="number"
-							placeholder="Nhập cấu hình ROM"
-							id="rom"
-							name="rom"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="description">Mô tả</label>
-						<input
-							class="form-control"
-							type="text"
-							placeholder="Nhập mô tả"
-							id="description"
-							name="description"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="category">Danh mục</label>
-						<select
-							class="form-select"
-							aria-label="Default select example"
-							id="category"
-							name="category"
-						>
-							<option selected>Chọn danh mục</option>
-							<option value="iPhone 11 Series">iPhone 11 Series</option>
-							<option value="iPhone 12 Series">iPhone 12 Series</option>
-							<option value="iPhone 13 Series">iPhone 13 Series</option>
-							<option value="iPhone 14 Series">iPhone 14 Series</option>
-						</select>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-				Huỷ
-			</button>
-			<button
-				type="button"
-				class="btn-add-product btn btn-primary pe-auto"
-				onclick="addProduct()"
-			> Thêm </button>
-		</div>
-	</div>
-</div>
 
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
 	<div
@@ -366,6 +230,112 @@
 				data-bs-dismiss="toast"
 				aria-label="Close"
 			></button>
+		</div>
+	</div>
+</div>
+
+<div
+	class="modal fade"
+	id="invoiceDetailModal"
+	tabindex="-1"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="add-product-modal-label">Chi tiết hóa đơn</h5>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="mb-3">
+						<label for="invoice-code">Mã hóa đơn</label>
+						<input
+							class="form-control"
+							type="text"
+							id="invoice-code"
+							name="invoice-code"
+							disabled
+						/>
+					</div>
+					<div class="mb-3">
+						<label for="customer-name">Tên khách hàng</label>
+						<input
+							class="form-control"
+							type="text"
+							id="customer-name"
+							name="customer-name"
+							disabled
+						/>
+					</div>
+					<div class="mb-3">
+						<label for="total-products">Tổng số hàng</label>
+						<input
+							class="form-control"
+							type="number"
+							id="total-products"
+							name="total-products"
+							disabled
+						/>
+					</div>
+					<div class="mb-3">
+						<label for="total-price">Tổng tiền</label>
+						<input
+							class="form-control"
+							type="text"
+							id="total-price"
+							name="total-price"
+							disabled
+						/>
+					</div>
+					<div class="mb-3">
+						<label for="receive-money">Số tiền nhận</label>
+						<input
+							class="form-control"
+							type="text"
+							id="receive-money"
+							name="receive-money"
+							disabled
+						/>
+					</div>
+					<div class="mb-3">
+						<label for="excess-money">Số tiền thừa</label>
+						<input
+							class="form-control"
+							type="text"
+							id="excess-money"
+							name="excess-money"
+							disabled
+						/>
+					</div>
+					<div class="mb-3">
+						<label for="sales-staff">Nhân viên</label>
+						<input
+							class="form-control"
+							type="text"
+							id="sales-staff"
+							name="sales-staff"
+							disabled
+						/>
+					</div>
+					<div class="mb-3">
+						<label for="created-at">Ngày tạo hóa đơn</label>
+						<input
+							class="form-control"
+							type="text"
+							id="created-at"
+							name="created-at"
+							disabled
+						/>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
