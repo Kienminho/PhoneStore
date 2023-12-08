@@ -2,6 +2,8 @@ const multer = require("multer");
 
 const Common = require("../common/Common");
 const Model = require("../models/Products");
+const { Customer } = require("../models/Customer");
+const { Invoice, InvoiceItem } = require("../models/Invoice");
 
 //setup folder save file
 const storage = multer.diskStorage({
@@ -172,6 +174,10 @@ const generateSixDigitNumber = () => {
 module.exports = {
   getAllProducts: getAllProducts,
   addProduct: addProduct,
+  getCustomerProfile,
+  addNewCustomerProfile,
+  getCustomerPurchaseHistory,
+  getCustomerInvoiceDetail,
   upload: upload,
   deleteProduct: deleteProduct,
   updateProduct: updateProduct,
