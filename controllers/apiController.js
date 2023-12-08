@@ -163,6 +163,129 @@ const updateProduct = async (req, res) => {
   return res.json(Common.createErrorResponseModel());
 };
 
+const getCustomerProfile = async (req, res) => {
+  try {
+    const customer = await Customer.findOne({
+      phoneNumber: req.body.phoneNumber,
+    });
+
+    if (customer) {
+      return res.json(
+        Common.createSuccessResponseModel(1, customer.toObject())
+      );
+    } else {
+      return res.json(
+        Common.createResponseModel(404, "Không tìm thấy khách hàng")
+      );
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return res.json(
+      Common.createResponseModel(500, "Vui lòng đợi trong ít phút.")
+    );
+  }
+};
+
+const addNewCustomerProfile = async (req, res) => {
+  try {
+    const newCustomer = await Customer.create({
+      phoneNumber: req.body.phoneNumber,
+      fullName: req.body.fullName,
+      address: req.body.address,
+    });
+
+    return res.json(
+      Common.createSuccessResponseModel(1, newCustomer.toObject())
+    );
+  } catch (error) {
+    console.error("Error:", error);
+    return res.json(
+      Common.createResponseModel(500, "Vui lòng đợi trong ít phút.")
+    );
+  }
+};
+
+const getCustomerPurchaseHistory = async (req, res) => {
+  try {
+    const invoices = await Invoice.find({
+      customer: req.body.customerId,
+    })
+      .populate("customer", "fullName")
+      .populate("salesStaff", "fullName")
+      .sort({ createdAt: -1 });
+
+    const getInvoiceItems = async (invoice) => {
+      const invoiceObj = invoice.toObject();
+      const invoiceItems = await InvoiceItem.find({ invoice: invoice._id });
+      invoiceObj.totalPrice = 0;
+      invoiceObj.totalProducts = 0;
+
+      invoiceItems.forEach((item) => {
+        invoiceObj.totalPrice += item.unitPrice * item.quantity;
+        invoiceObj.totalProducts += item.quantity;
+      });
+
+      return invoiceObj;
+    };
+
+    const updatedInvoices = await Promise.all(invoices.map(getInvoiceItems));
+
+    return res.json(
+      Common.createSuccessResponseModel(updatedInvoices.length, updatedInvoices)
+    );
+  } catch (error) {
+    console.error("Error:", error);
+    return res.json(
+      Common.createResponseModel(500, "Vui lòng đợi trong ít phút.")
+    );
+  }
+};
+
+const getCustomerInvoiceDetail = async (req, res) => {
+  try {
+    const invoice = await Invoice.findOne({
+      _id: req.body.invoiceId,
+      customer: req.body.customerId,
+    })
+      .populate("customer", "fullName")
+      .populate("salesStaff", "fullName");
+
+    if (invoice) {
+      const invoiceObj = invoice.toObject();
+      const invoiceItems = await InvoiceItem.find({
+        invoice: invoice._id,
+      }).populate("product", "name");
+      const productsWithCategoryNames = await getProductWithCategoryName();
+
+      invoiceItems.forEach((item) => {
+        item.product = productsWithCategoryNames.find(
+          (product) => product._id.toString() === item.product.toString()
+        );
+      });
+
+      invoiceObj.products = invoiceItems;
+      invoiceObj.totalPrice = 0;
+      invoiceObj.totalProducts = 0;
+
+      invoiceItems.forEach((item) => {
+        invoiceObj.totalPrice += item.unitPrice * item.quantity;
+        invoiceObj.totalProducts += item.quantity;
+      });
+
+      return res.json(Common.createSuccessResponseModel(1, invoiceObj));
+    } else {
+      return res.json(
+        Common.createResponseModel(404, "Không tìm thấy hóa đơn này")
+      );
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return res.json(
+      Common.createResponseModel(500, "Vui lòng đợi trong ít phút.")
+    );
+  }
+};
+
 //hàm random barcode
 const generateSixDigitNumber = () => {
   // Tạo số ngẫu nhiên từ 100000 đến 999999 (bao gồm cả hai đầu)
@@ -174,10 +297,10 @@ const generateSixDigitNumber = () => {
 module.exports = {
   getAllProducts: getAllProducts,
   addProduct: addProduct,
-  getCustomerProfile,
-  addNewCustomerProfile,
-  getCustomerPurchaseHistory,
-  getCustomerInvoiceDetail,
+  getCustomerProfile: getCustomerProfile,
+  addNewCustomerProfile: getCustomerProfile,
+  getCustomerPurchaseHistory: getCustomerProfile,
+  getCustomerInvoiceDetail: getCustomerProfile,
   upload: upload,
   deleteProduct: deleteProduct,
   updateProduct: updateProduct,
