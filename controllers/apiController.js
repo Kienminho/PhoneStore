@@ -1,9 +1,12 @@
 const multer = require("multer");
+const bcrypt = require("bcrypt");
 
+const Mail = require("../common/sendMail");
 const Common = require("../common/Common");
 const Model = require("../models/Products");
 const { Customer } = require("../models/Customer");
 const { Invoice, InvoiceItem } = require("../models/Invoice");
+const User = require("../models/Users");
 
 //setup folder save file
 const storage = multer.diskStorage({
@@ -206,19 +209,19 @@ const addNewCustomerProfile = async (req, res) => {
 };
 
 const getProductWithCategoryName = async () => {
-	const listProducts = await Model.Products.find({});
-	const categories = await Model.Category.find({});
+  const listProducts = await Model.Products.find({});
+  const categories = await Model.Category.find({});
 
-	return listProducts.map((product) => {
-		const matchingCategory = categories.find(
-			(category) => category._id.toString() === product.category.toString()
-		);
+  return listProducts.map((product) => {
+    const matchingCategory = categories.find(
+      (category) => category._id.toString() === product.category.toString()
+    );
 
-		return {
-			...product.toObject(),
-			categoryName: matchingCategory ? matchingCategory.nameCategory : null,
-		};
-	});
+    return {
+      ...product.toObject(),
+      categoryName: matchingCategory ? matchingCategory.nameCategory : null,
+    };
+  });
 };
 
 const getCustomerPurchaseHistory = async (req, res) => {
@@ -301,6 +304,126 @@ const getCustomerInvoiceDetail = async (req, res) => {
   }
 };
 
+const getAllUser = async (req, res) => {
+  try {
+    const listUser = await User.find({
+      isDeleted: false,
+      role: { $ne: "admin" },
+    });
+    return res.json(
+      Common.createSuccessResponseModel(listUser.length, listUser)
+    );
+  } catch (error) {
+    // Handle errors appropriately
+    console.error(error);
+    return res
+      .status(500)
+      .json(Common.createErrorResponseModel("Internal Server Error"));
+  }
+};
+
+const deleteUser = async (req, res) => {
+  const isDeleted = await User.updateOne(
+    { _id: req.params.id },
+    {
+      $set: {
+        isDeleted: true,
+      },
+    }
+  );
+  if (isDeleted.modifiedCount > 0) {
+    return res.json(Common.createSuccessResponseModel(0, true));
+  }
+  return res.json(
+    Common.createResponseModel(400, "Vui lòng thử lại sau.", false)
+  );
+};
+
+const reactivateAccount = async (req, res) => {
+  try {
+    const userExist = await User.findOneAndUpdate(
+      { _id: req.body.id },
+      {
+        $set: {
+          activationToken: Common.generateRandomToken(100),
+          activationExpires: new Date(),
+        },
+      }
+    );
+
+    Mail.sendMail(
+      userExist.email,
+      userExist.activationToken,
+      userExist.username
+    );
+    return res.json(Common.createSuccessResponseModel(0, true));
+  } catch (error) {
+    return res.json(
+      Common.createResponseModel(400, "Vui lòng thử lại sau.", false)
+    );
+  }
+};
+
+const uploadAvatar = async (req, res) => {
+  try {
+    const isUpdated = await User.updateOne(
+      { _id: req.body.id },
+      {
+        $set: {
+          avatar: req.file.path.match(/public(.*)/)?.[1],
+        },
+      }
+    );
+    if (isUpdated.modifiedCount > 0) {
+      return res.json(Common.createSuccessResponseModel(0, true));
+    }
+    return res.json(
+      Common.createResponseModel(400, "Vui lòng thử lại sau.", false)
+    );
+  } catch (error) {
+    return res.json(
+      Common.createResponseModel(400, "Vui lòng thử lại sau.", error)
+    );
+  }
+};
+
+const getInfoMine = async (req, res) => {
+  const info = await User.findOne({ fullName: req.session.fullName });
+  return res.json(Common.createSuccessResponseModel(1, info));
+};
+
+const changePassword = async (req, res) => {
+  const { id, oldPassword, password } = req.body;
+  const existUser = await User.findOne({
+    _id: id,
+    isDeleted: false,
+  });
+  const match = await bcrypt.compare(oldPassword, existUser.password);
+  if (match) {
+    const salt = await bcrypt.genSalt(10);
+
+    // Mã hóa password kết hợp với salt
+    const hash = await bcrypt.hash(password, salt);
+    const isUpdated = await User.updateOne(
+      { _id: id },
+      { $set: { password: hash } }
+    );
+    if (isUpdated.modifiedCount > 0) {
+      return res.json(Common.createSuccessResponseModel(0, true));
+    }
+    return res.json(
+      Common.createResponseModel(400, "Vui lòng thử lại sau.", false)
+    );
+  } else {
+    return res.json(
+      Common.createResponseModel(
+        400,
+        "Mật khẩu cũ hiện tại không đúng, vui lòng thử lại",
+        error
+      )
+    );
+  }
+};
 //hàm random barcode
 const generateSixDigitNumber = () => {
   // Tạo số ngẫu nhiên từ 100000 đến 999999 (bao gồm cả hai đầu)
@@ -319,4 +442,10 @@ module.exports = {
   upload: upload,
   deleteProduct: deleteProduct,
   updateProduct: updateProduct,
+  getAllUser: getAllUser,
+  deleteUser: deleteUser,
+  reactivateAccount: reactivateAccount,
+  uploadAvatar: uploadAvatar,
+  getInfoMine: getInfoMine,
+  changePassword: changePassword,
 };
