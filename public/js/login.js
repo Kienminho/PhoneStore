@@ -11,7 +11,7 @@ btnLogin.on("click", () => {
       password: password.val(),
     };
 
-    fetch("/auth/login", {
+    fetch("/auth/handleLogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,12 +21,11 @@ btnLogin.on("click", () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res.statusCode !== 200) {
-          username.val("");
+        if (res.statusCode === 200 || res.statusCode === 304) {
+          window.location.href = res.data.urlRedirect;
+        } else {
           password.val("");
           displayErrorMessage(res.message);
-        } else {
-          window.location.href = res.data.urlRedirect;
         }
       })
       .catch((err) => {

@@ -1,151 +1,66 @@
-<div class="layout-page">
-	<!-- Navbar -->
+<!-- Content wrapper -->
+<div class="content-wrapper">
+	<!-- Content -->
 
-	<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-		id="layout-navbar">
-		<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-			<a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-				<i class="bx bx-menu bx-sm"></i>
-			</a>
-		</div>
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Quản lý /</span>
+			Checkout</h4>
 
-		<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-			<!-- Search -->
+		<!-- Basic Bootstrap Table -->
+		<div class="card">
+			<div>
+				<h5 class="card-header">Checkout</h5>
+				<form id="form-checkout">
+					<div class="mb-3">
+						<label style="padding-bottom:8px; margin-left: 24px;" for="customer-phone-number">Số điện
+							thoại khách
+							hàng</label>
+						<input style="margin-left: auto; margin-right: auto; width: 96%" class="form-control"
+							type="text" placeholder="Số điện thoại" id="customer-phone-number"
+							name="customer-phone-number" onblur="getCustomerProfile()"
+							onchange="handlePhoneNumberInputOnchange()" />
+					</div>
+					<div class="mb-3">
+						<label style="padding-bottom:8px; margin-left: 24px;" for="customer-name">Tên khách
+							hàng</label>
+						<input style="margin-left: auto; margin-right: auto; width: 96%" class="form-control"
+							type="text" placeholder="Tên khách hàng" id="customer-name" name="customer-name" />
+					</div>
+					<div class="mb-3">
+						<label style="padding-bottom:8px; margin-left: 24px;" for="customer-address">Địa chỉ</label>
+						<input style="margin-left: auto; margin-right: auto; width: 96%" class="form-control"
+							type="text" placeholder="Địa chỉ" id="customer-address" name="customer-address" />
+					</div>
+				</form>
+			</div>
 
-			<!-- /Search -->
+			<div class="text-nowrap">
+				<h5 class="card-header">Lịch sử mua hàng</h5>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Mã hóa đơn</th>
+							<th>Tên khách hàng</th>
+							<th>Tổng số hàng</th>
 
-			<ul class="navbar-nav flex-row align-items-center ms-auto">
-				<!-- Place this tag where you want the button to render. -->
-				<!-- User -->
-				<li class="nav-item navbar-dropdown dropdown-user dropdown">
-					<a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-						<div class="avatar avatar-online">
-							<img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-						</div>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<li>
-							<a class="dropdown-item" href="#">
-								<div class="d-flex">
-									<div class="flex-shrink-0 me-3">
-										<div class="avatar avatar-online">
-											<img src="../assets/img/avatars/1.png" alt
-												class="w-px-40 h-auto rounded-circle" />
-										</div>
-									</div>
-									<div class="flex-grow-1">
-										<span class="fw-semibold d-block">John Doe</span>
-										<small class="text-muted">Admin</small>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<div class="dropdown-divider"></div>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">
-								<i class="bx bx-user me-2"></i>
-								<span class="align-middle">My Profile</span>
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">
-								<i class="bx bx-cog me-2"></i>
-								<span class="align-middle">Settings</span>
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">
-								<span class="d-flex align-items-center align-middle">
-									<i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-									<span class="flex-grow-1 align-middle">Billing</span>
-									<span
-										class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-								</span>
-							</a>
-						</li>
-						<li>
-							<div class="dropdown-divider"></div>
-						</li>
-						<li>
-							<a class="dropdown-item" href="auth-login-basic.html">
-								<i class="bx bx-power-off me-2"></i>
-								<span class="align-middle">Log Out</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<!--/ User -->
-			</ul>
-		</div>
-	</nav>
-
-	<!-- / Navbar -->
-
-	<!-- Content wrapper -->
-	<div class="content-wrapper">
-		<!-- Content -->
-
-		<div class="container-xxl flex-grow-1 container-p-y">
-			<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Quản lý /</span>
-				Checkout</h4>
-
-			<!-- Basic Bootstrap Table -->
-			<div class="card">
-				<div>
-					<h5 class="card-header">Checkout</h5>
-					<form id="form-checkout">
-						<div class="mb-3">
-							<label style="padding-bottom:8px; margin-left: 24px;" for="customer-phone-number">Số điện
-								thoại khách
-								hàng</label>
-							<input style="margin-left: auto; margin-right: auto; width: 96%" class="form-control"
-								type="text" placeholder="Số điện thoại" id="customer-phone-number"
-								name="customer-phone-number" onblur="getCustomerProfile()"
-								onchange="handlePhoneNumberInputOnchange()" />
-						</div>
-						<div class="mb-3">
-							<label style="padding-bottom:8px; margin-left: 24px;" for="customer-name">Tên khách
-								hàng</label>
-							<input style="margin-left: auto; margin-right: auto; width: 96%" class="form-control"
-								type="text" placeholder="Tên khách hàng" id="customer-name" name="customer-name" />
-						</div>
-						<div class="mb-3">
-							<label style="padding-bottom:8px; margin-left: 24px;" for="customer-address">Địa chỉ</label>
-							<input style="margin-left: auto; margin-right: auto; width: 96%" class="form-control"
-								type="text" placeholder="Địa chỉ" id="customer-address" name="customer-address" />
-						</div>
-					</form>
-				</div>
-
-				<div class=" text-nowrap">
-					<h5 class="card-header">Lịch sử mua hàng</h5>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Mã hóa đơn</th>
-								<th>Tên khách hàng</th>
-								<th>Tổng số hàng</th>
-
-								<th>Tổng tiền</th>
-								<th>Số tiền nhận</th>
-								<th>Số tiền thừa</th>
-								<th>Nhân viên</th>
-								<th>Thời gian</th>
-							</tr>
-						</thead>
-						<tbody class="tbody table-border-bottom-0">
-						</tbody>
-					</table>
-				</div>
+							<th>Tổng tiền</th>
+							<th>Số tiền nhận</th>
+							<th>Số tiền thừa</th>
+							<th>Nhân viên</th>
+							<th>Thời gian</th>
+						</tr>
+					</thead>
+					<tbody class="tbody table-border-bottom-0">
+					</tbody>
+				</table>
 			</div>
 		</div>
-		<!-- / Content -->
 	</div>
+	<!-- / Content -->
+</div>
 
-	<!-- Footer -->
-	<!-- <footer class="content-footer footer bg-footer-theme">
+<!-- Footer -->
+<!-- <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
                   ©
@@ -175,9 +90,9 @@
                 </div>
               </div>
             </footer> -->
-	<!-- / Footer -->
+<!-- / Footer -->
 
-	<div class="content-backdrop fade"></div>
+<div class="content-backdrop fade"></div>
 </div>
 
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -237,5 +152,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-<script src="/js/checkout.js"></script>
+	<script src="/js/checkout.js"></script>

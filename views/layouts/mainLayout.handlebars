@@ -43,6 +43,58 @@
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../assets/js/config.js"></script>
+  <script>
+    fetch("/api/users/info-mine")
+      .then((res) => res.json())
+      .then((res) => {
+        $(".user-name").text(res.data.username);
+        $(".role").text(res.data.role);
+        $("#avatar-user").attr("src", res.data.avatar ?? "../assets/img/avatars/1.png");
+        $("#sub-avatar").attr("src", res.data.avatar ?? "../assets/img/avatars/1.png");
+        id = res.data._id;
+        if (res.data.role !== 'admin') {
+          $(".employee-manager").addClass("d-none");
+          $(".product-manager").addClass("d-none");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var menuItems = document.querySelectorAll('.menu-item');
+
+      // Retrieve the active index from localStorage
+      var activeIndex = localStorage.getItem('activeIndex');
+
+      // Set the initial active class based on the retrieved index
+      if (activeIndex !== null) {
+        menuItems[activeIndex].classList.add('active');
+      }
+
+      menuItems.forEach(function (item, index) {
+        item.addEventListener('click', function (event) {
+          // Prevent the default page transition
+          event.preventDefault();
+
+          // Remove the 'active' class from all menu items
+          menuItems.forEach(function (otherItem) {
+            otherItem.classList.remove('active');
+          });
+
+          // Add the 'active' class to the clicked menu item
+          item.classList.add('active');
+
+          // Save the active index to localStorage
+          localStorage.setItem('activeIndex', index);
+
+          // Get the href attribute and navigate to the URL
+          var href = item.querySelector('a').getAttribute('href');
+          window.location.href = href;
+        });
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -110,8 +162,8 @@
 
         <ul class="menu-inner py-1">
           <!-- Dashboard -->
-          <li class="menu-item active">
-            <a href="/" class="menu-link">
+          <li class="menu-item">
+            <a href="/home" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Trang chủ</div>
             </a>
@@ -157,13 +209,13 @@
             </ul>
           </li>
           <!-- Tables -->
-          <li class="menu-item">
+          <li class="employee-manager menu-item">
             <a href="/admin/employee-manager" class="menu-link">
               <i class="menu-icon tf-icons bx bxs-user-rectangle"></i>
               <div data-i18n="Tables">Quản lý nhân viên</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="product-manager menu-item">
             <a href="/admin/product-manager" class="menu-link">
               <i class="menu-icon tf-icons bx bx-devices"></i>
               <div data-i18n="Tables">Quản lý sản phẩm</div>
@@ -175,34 +227,90 @@
               <div data-i18n="Tables">Checkout</div>
             </a>
           </li>
-          <!-- Misc -->
-          <!-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item">
-              <a
-                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                target="_blank"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">Support</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a
-                href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                target="_blank"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Documentation">Documentation</div>
-              </a>
-            </li> -->
         </ul>
       </aside>
       <!-- / Menu -->
 
       <!-- Layout container -->
-      {{{body}}}
+      <div class="layout-page">
+        <nav
+          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+          id="layout-navbar">
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+              <i class="bx bx-menu bx-sm"></i>
+            </a>
+          </div>
+
+          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <!-- Search -->
+            <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
+                  aria-label="Search..." />
+              </div>
+            </div>
+            <!-- /Search -->
+
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <!-- Place this tag where you want the button to render. -->
+              {{!-- <li class="nav-item lh-1 me-3">
+                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free"
+                  data-icon="octicon-star" data-size="large" data-show-count="true"
+                  aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+              </li> --}}
+
+              <!-- User -->
+              <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                  <div class="avatar avatar-online">
+                    <img src="" id="avatar-user" alt="avatar" class="w-px-40 h-auto rounded-circle" />
+                  </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                          <div class="avatar avatar-online">
+                            <img alt="avatar" id="sub-avatar" class="w-px-40 h-auto rounded-circle" />
+                          </div>
+                        </div>
+                        <div class="flex-grow-1">
+                          <span class="user-name fw-semibold d-block"></span>
+                          <small class="role text-muted"></small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="dropdown-divider"></div>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/my-profile">
+                      <i class="bx bx-user me-2"></i>
+                      <span class="align-middle">Hồ sơ</span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="dropdown-divider"></div>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/auth/logout">
+                      <i class="bx bx-power-off me-2"></i>
+                      <span class="align-middle">Đăng xuất</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!--/ User -->
+            </ul>
+          </div>
+        </nav>
+        {{{body}}}
+      </div>
+
       <!-- / Layout page -->
     </div>
 
@@ -241,6 +349,7 @@
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </body>
 
 </html>

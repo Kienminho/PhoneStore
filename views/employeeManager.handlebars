@@ -1,464 +1,80 @@
-<div class="layout-page">
-    <!-- Navbar -->
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
 
-    <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-        id="layout-navbar">
-        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
-            </a>
-        </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Quản lý nhân viên</h4>
 
-        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <!-- Search -->
-            <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                    <i class="bx bx-search fs-4 lh-0"></i>
-                    <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                        aria-label="Search..." />
-                </div>
+        <!-- Basic Bootstrap Table -->
+        <div class="card">
+            <div>
+                <h5 class="card-header">Sản phẩm</h5>
+                <button style="margin-left: 24px; margin-bottom:8px" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#create-employee-modal">Tạo nhân viên</button>
+
             </div>
-            <!-- /Search -->
-
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-                <!-- User -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                        <div class="avatar avatar-online">
-                            <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar avatar-online">
-                                            <img src="../assets/img/avatars/1.png" alt
-                                                class="w-px-40 h-auto rounded-circle" />
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="fw-semibold d-block">John Doe</span>
-                                        <small class="text-muted">Admin</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-user me-2"></i>
-                                <span class="align-middle">My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-cog me-2"></i>
-                                <span class="align-middle">Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <span class="d-flex align-items-center align-middle">
-                                    <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                    <span class="flex-grow-1 align-middle">Billing</span>
-                                    <span
-                                        class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="auth-login-basic.html">
-                                <i class="bx bx-power-off me-2"></i>
-                                <span class="align-middle">Log Out</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!--/ User -->
-            </ul>
-        </div>
-    </nav>
-
-    <!-- / Navbar -->
-
-    <!-- Content wrapper -->
-    <div class="content-wrapper">
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Quản lý sản phẩm</h4>
-
-            <!-- Basic Bootstrap Table -->
-            <div class="card">
-                <div>
-                    <h5 class="card-header">Sản phẩm</h5>
-                    <button style="margin-left: 24px; margin-bottom:8px" type="button" class="btn btn-primary"
-                        data-bs-toggle="modal" data-bs-target="#addProductModal">Thêm sản phẩm</button>
-
-                </div>
 
 
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Bar Code</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Hình ảnh</th>
-
-                                <th>Cấu hình</th>
-                                <th>Ngày nhập</th>
-                                <th>Giá nhập</th>
-                                <th>Giá bán</th>
-                                <th>Loại</th>
-                                <th>Số lượng bán</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody table-border-bottom-0">
-                            <tr>
-                                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular
-                                        Project</strong></td>
-                                <td>Albert Cook</td>
-                                <td>
-                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11-128gb.png"
-                                                alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11-128gb.png"
-                                                alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11-128gb.png"
-                                                alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>Albert Cooks</td>
-                                <td>Albert Cook</td>
-                                <td>Albert Cook</td>
-                                <td>Albert Cook</td>
-                                <td>Albert Cook</td>
-                                <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-edit-alt me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-trash me-1"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>React Project</strong>
-                                </td>
-                                <td>Barry Hunter</td>
-                                <td>
-                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../assets/img/avatars/5.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../assets/img/avatars/6.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../assets/img/avatars/7.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-success me-1">Completed</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-edit-alt me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-trash me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>VueJs Project</strong>
-                                </td>
-                                <td>Trevor Baker</td>
-                                <td>
-                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../assets/img/avatars/5.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../assets/img/avatars/6.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../assets/img/avatars/7.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-edit-alt me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-trash me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>Bootstrap
-                                        Project</strong>
-                                </td>
-                                <td>Jerry Milton</td>
-                                <td>
-                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../assets/img/avatars/5.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../assets/img/avatars/6.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../assets/img/avatars/7.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-edit-alt me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-trash me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="text-nowrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Họ và tên</th>
+                            <th>Email</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody table-border-bottom-0">
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!-- / Content -->
     </div>
-
-
-    <!-- Footer -->
-    <!-- <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer> -->
-    <!-- / Footer -->
-
-    <div class="content-backdrop fade"></div>
+    <!-- / Content -->
 </div>
+
+<div class="content-backdrop fade"></div>
+
 <!-- Content wrapper -->
 <!-- modal add product -->
-<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="create-employee-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-product-modal-label">Thêm sản phẩm</h5>
+                <h5 class="modal-title" id="add-product-modal-label">Tạo mới nhân viên</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="from-add-product" enctype="multipart/form-data">
+                <form id="form-create-employee" enctype="application/x-www-form-urlencoded">
                     <div class="mb-3">
-                        <label for="product-name">Tên sản phẩm</label>
-                        <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" id="product-name"
-                            name="productName">
+                        <label for="employee-name">Họ tên nhân viên</label>
+                        <input class="form-control" type="text" placeholder="Nhập tên nhân viên" id="employee-name"
+                            name="employeeName">
                     </div>
-                    <div class="mb-3">
-                        <label for="product-images">Ảnh sản phẩm</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="product-image" name="productImage"
-                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 
-                        </div>
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="text" placeholder="Nhập email" id="email" name="email">
                     </div>
                     <div class="mb-3">
-                        <label for="price">Giá nhập sản phẩm</label>
-                        <input class="form-control" type="number" placeholder="Nhập giá nhập" id="import-price"
-                            name="importPrice">
+                        <label for="address">Địa chỉ</label>
+                        <input class="form-control" type="text" placeholder="Nhập địa chỉ" id="address" name="address">
                     </div>
                     <div class="mb-3">
-                        <label for="price">Giá bán sản phẩm</label>
-                        <input class="form-control" type="number" placeholder="Nhập giá bán" id="sale-price"
-                            name="salePrice">
-                    </div>
-                    <div class="mb-3">
-                        <label for="size">Kích thước</label>
-                        <input class="form-control" type="text" placeholder="Nhập kích thước" id="size" name="size">
-                    </div>
-                    <div class="mb-3">
-                        <label for="price">Ram</label>
-                        <input class="form-control" type="number" placeholder="Nhập cấu hình RAM" id="ram" name="ram">
-                    </div>
-                    <div class="mb-3">
-                        <label for="price">Rom</label>
-                        <input class="form-control" type="number" placeholder="Nhập cấu hình ROM" id="rom" name="rom">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description">Mô tả</label>
-                        <input class="form-control" type="text" placeholder="Nhập mô tả" id="description-product"
-                            name="description">
-                    </div>
-                    <div class="mb-3">
-                        <label for="category">Danh mục</label>
-                        <select class="form-select" aria-label="Default select example" id="category" name="category">
-                            <option selected>Chọn danh mục</option>
-                            <option value="iPhone 11 Series">iPhone 11 Series</option>
-                            <option value="iPhone 12 Series">iPhone 12 Series</option>
-                            <option value="iPhone 13 Series">iPhone 13 Series</option>
-                            <option value="iPhone 14 Series">iPhone 14 Series</option>
-                            <option value="iPhone 14 Series">iPhone 15 Series</option>
-                        </select>
+                        <label for="phoneNumber">Số điện thoại</label>
+                        <input class="form-control" type="text" placeholder="Nhập số diện thoại" id="phone-number"
+                            name="phoneNumber">
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Huỷ </button>
-            <button type="button" class="btn-add-product btn btn-primary pe-auto" onclick="addProduct()"> Thêm </button>
-        </div>
-    </div>
-</div>
-
-<!-- modal update product --->
-<div class="modal fade" id="update-product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="add-product-modal-label">Cập nhật sản phẩm</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="from-update-product" enctype="multipart/form-data">
-                    <input class="form-control d-none" type="number" id="bar-code" name="barCode">
-                    <div class="mb-3">
-                        <label for="product-name">Tên sản phẩm</label>
-                        <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" id="product-name-update"
-                            name="productNameUpdate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-images">Ảnh sản phẩm</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="product-image-update" name="productImageUpdate"
-                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price">Giá nhập sản phẩm</label>
-                        <input class="form-control" type="number" placeholder="Nhập giá nhập" id="import-price-update"
-                            name="importPriceUpdate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="price">Giá bán sản phẩm</label>
-                        <input class="form-control" type="number" placeholder="Nhập giá bán" id="sale-price-update"
-                            name="salePriceUpdate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="price">Ram</label>
-                        <input class="form-control" type="number" placeholder="Nhập cấu hình RAM" id="ram-update"
-                            name="ramUpdate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="price">Rom</label>
-                        <input class="form-control" type="number" placeholder="Nhập cấu hình ROM" id="rom-update"
-                            name="romUpdate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="saleNumber">Số lượng đã bán</label>
-                        <input class="form-control" type="number" placeholder="Nhập số lượng đã bán"
-                            id="sale-number-update" name="saleNumber">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Huỷ </button>
-            <button type="button" class="btn-add-product btn btn-primary pe-auto" onclick="confirmUpdateProduct()"> Cập
-                nhật
+            <button type="button" class="btn-add-product btn btn-primary pe-auto" onclick="createEmployee()"> Tạo
             </button>
         </div>
     </div>
@@ -469,11 +85,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Xoá sản phẩm</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Xoá nhân viên</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Bạn có muốn xoá sản phẩm này không?
+                Bạn có muốn xoá nhân viên này không?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -494,4 +110,4 @@
         </div>
     </div>
 </div>
-<script src="/js/product-manager.js"></script>
+<script src="/js/employee-manager.js"></script>
