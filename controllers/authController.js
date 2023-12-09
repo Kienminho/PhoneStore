@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-
+const multer = require("multer");
 const User = require("../models/Users");
 const Common = require("../common/Common");
 const Mail = require("../common/sendMail");
@@ -23,7 +23,12 @@ const renderLogin = (req, res) => {
 //xử lý login
 const handleLogin = async (req, res) => {
   const { username, password } = req.body;
-  const existUser = await User.findOne({ username: username });
+  console.log(req.body);
+  const existUser = await User.findOne({
+    username: username,
+    isDeleted: false,
+  });
+  console.log(existUser);
   if (!existUser || existUser === null || existUser.activated === false) {
     return res.json(
       Common.createResponseModel(
@@ -34,22 +39,25 @@ const handleLogin = async (req, res) => {
     );
   }
 
-  // so sánh mật khẩu
-  const match = await bcrypt.compare(password, existUser.password);
-  if (match) {
-    if (existUser.firstLogin) {
+  //check firstlogin
+  if (existUser.firstLogin) {
+    if (password === existUser.password) {
       return res.json(
         Common.createResponseModel(
           304,
           "Lần đăng nhập đầu tiên, vui lòng đổi mật khẩu để tiếp tục truy cập hệ thống",
           {
-            urlRedirect: "/auth/change_password",
+            urlRedirect: `/auth/change_password/${existUser._id}`,
             token: existUser.activationToken,
           }
         )
       );
     }
+  }
 
+  // so sánh mật khẩu
+  const match = await bcrypt.compare(password, existUser.password);
+  if (match) {
     // khởi tạo session và cookie
     req.session.fullName = existUser.fullName;
     res.cookie("fullname", existUser.fullName);
@@ -62,17 +70,20 @@ const handleLogin = async (req, res) => {
       Common.createSuccessResponseModel(0, { urlRedirect: "/home" })
     );
   }
+  return res.json(
+    Common.createResponseModel(404, "Mật khẩu sai, vui lòng thử lại.", false)
+  );
 };
 
 // xử lý đăng ký
 const handleRegister = async (req, res) => {
-  const { fullName, email } = req.body;
-  const existUser = await User.findOne({ email: email });
+  const { fullName, email, address, phoneNumber } = req.body;
+  const existUser = await User.findOne({ email: email, isDeleted: false });
   if (existUser)
-    res.json(
+    return res.json(
       Common.createResponseModel(
         Common.statusCode.ERROR,
-        "User already exists.",
+        "Nhân viên đã tồn tại.",
         false
       )
     );
@@ -85,16 +96,22 @@ const handleRegister = async (req, res) => {
       password: Common.getUserNameByEmail(email),
       fullName: fullName,
       email: email,
+      address: address,
+      phoneNumber: phoneNumber,
       activationToken: Common.generateRandomToken(100),
       activationExpires: activationExpires,
+      isDeleted: false,
     });
 
     console.log(user);
     //send mail
     Mail.sendMail(email, user.activationToken, user.username);
 
-    res.json(Common.createSuccessResponseModel(user));
-  } catch (error) {}
+    return res.json(Common.createSuccessResponseModel(user));
+  } catch (error) {
+    console.log("authController-Line 102: " + error.message);
+    return res.json(Common.createResponseModel(400, error, false));
+  }
 };
 
 //xử lý active tài khoản
@@ -136,7 +153,9 @@ const renderChangePassword = (req, res) => {
 // xử lý đổi mật khẩu
 const handleChangePassword = async (req, res) => {
   const { id, password } = req.body;
-  const user = await User.findOne({ activationToken: id });
+  const user = await User.findOne({
+    $or: [{ activationToken: id }, { _id: id }],
+  });
   if (!user) {
     res.json(
       Common.createResponseModel(
@@ -159,6 +178,23 @@ const handleChangePassword = async (req, res) => {
   res.json(Common.createSuccessResponseModel(true));
 };
 
+const handleLogout = async (req, res) => {
+  req.session.destroy();
+  // Clear cookies
+  res.clearCookie("fullname");
+  res.clearCookie("permission");
+
+  return res.redirect("/auth/login");
+};
+
+const checkLoggedIn = (req, res, next) => {
+  if (!req.session || !req.session.isLogin) {
+    return res.redirect("/auth/login");
+  }
+
+  next();
+};
+
 module.exports = {
   renderLogin: renderLogin,
   handleLogin: handleLogin,
@@ -167,4 +203,6 @@ module.exports = {
   renderChangePassword: renderChangePassword,
   handleChangePassword: handleChangePassword,
   checkPermission: checkPermission,
+  handleLogout: handleLogout,
+  checkLoggedIn: checkLoggedIn,
 };

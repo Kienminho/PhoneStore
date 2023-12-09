@@ -11,11 +11,14 @@ const userSchema = new mongoose.Schema({
     enum: ["admin", "salesperson"],
     default: "salesperson",
   },
+  address: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  avatar: { type: String, required: false },
   activationToken: String,
   activationExpires: Date,
   activated: { type: Boolean, default: false },
   firstLogin: { type: Boolean, default: true },
-  isDelete: { type: Boolean, default: false },
+  isDeleted: { type: Boolean, default: false },
 });
 
 const User = mongoose.model("User", userSchema);
