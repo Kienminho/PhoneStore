@@ -205,6 +205,22 @@ const addNewCustomerProfile = async (req, res) => {
   }
 };
 
+const getProductWithCategoryName = async () => {
+	const listProducts = await Model.Products.find({});
+	const categories = await Model.Category.find({});
+
+	return listProducts.map((product) => {
+		const matchingCategory = categories.find(
+			(category) => category._id.toString() === product.category.toString()
+		);
+
+		return {
+			...product.toObject(),
+			categoryName: matchingCategory ? matchingCategory.nameCategory : null,
+		};
+	});
+};
+
 const getCustomerPurchaseHistory = async (req, res) => {
   try {
     const invoices = await Invoice.find({
@@ -245,7 +261,6 @@ const getCustomerInvoiceDetail = async (req, res) => {
   try {
     const invoice = await Invoice.findOne({
       _id: req.body.invoiceId,
-      customer: req.body.customerId,
     })
       .populate("customer", "fullName")
       .populate("salesStaff", "fullName");
@@ -298,9 +313,9 @@ module.exports = {
   getAllProducts: getAllProducts,
   addProduct: addProduct,
   getCustomerProfile: getCustomerProfile,
-  addNewCustomerProfile: getCustomerProfile,
-  getCustomerPurchaseHistory: getCustomerProfile,
-  getCustomerInvoiceDetail: getCustomerProfile,
+  addNewCustomerProfile: addNewCustomerProfile,
+  getCustomerPurchaseHistory: getCustomerPurchaseHistory,
+  getCustomerInvoiceDetail: getCustomerInvoiceDetail,
   upload: upload,
   deleteProduct: deleteProduct,
   updateProduct: updateProduct,
