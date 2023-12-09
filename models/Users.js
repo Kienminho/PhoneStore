@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
   activationExpires: Date,
   activated: { type: Boolean, default: false },
   firstLogin: { type: Boolean, default: true },
+  isDelete: { type: Boolean, default: false },
 });
 
 const User = mongoose.model("User", userSchema);
