@@ -87,14 +87,18 @@ const handleRegister = async (req, res) => {
       email: email,
       activationToken: Common.generateRandomToken(100),
       activationExpires: activationExpires,
+      isDeleted: false,
     });
 
     console.log(user);
     //send mail
     Mail.sendMail(email, user.activationToken, user.username);
 
-    res.json(Common.createSuccessResponseModel(user));
-  } catch (error) {}
+    return res.json(Common.createSuccessResponseModel(user));
+  } catch (error) {
+    console.log(error);
+    return res.json(Common.createResponseModel(400, error, false));
+  }
 };
 
 //xử lý active tài khoản
