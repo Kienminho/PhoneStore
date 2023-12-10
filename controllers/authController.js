@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const multer = require("multer");
 const User = require("../models/Users");
 const Common = require("../common/Common");
 const Mail = require("../common/sendMail");
@@ -16,7 +15,7 @@ const checkPermission = (req, res, next) => {
   }
 };
 
-const renderLogin = (req, res) => {
+const renderLogin = async (req, res) => {
   return res.render("login", { layout: "authLayout" });
 };
 

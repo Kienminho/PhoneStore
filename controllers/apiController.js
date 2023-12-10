@@ -13,6 +13,7 @@ const { Invoice, InvoiceItem } = require("../models/Invoice");
 const User = require("../models/Users");
 const Cart = require("../models/Carts");
 const mongoose = require("mongoose");
+const { log } = require("console");
 
 //setup folder save file
 const storage = multer.diskStorage({
@@ -30,7 +31,7 @@ const upload = multer({ storage: storage });
 
 const getAllProducts = async (req, res) => {
   try {
-    const listProducts = await Model.Products.find({});
+    const listProducts = await Model.Products.find({ isDeleted: false });
     const categories = await Model.Category.find({});
 
     const productsWithCategoryNames = listProducts.map((product) => {
@@ -105,6 +106,7 @@ const deleteProduct = async (req, res) => {
   try {
     const idProduct = parseInt(req.params.id, 10);
     const p = await Model.Products.findOne({ barCode: idProduct });
+    console.log(p);
     if (p.saleNumber > 0)
       return res.json(
         Common.createResponseModel(
@@ -343,11 +345,13 @@ const createInvoice = async (req, res) => {
     }
 
     const invoice = await Invoice.create({
-      invoiceCode: generateInvoiceCode(),
+      invoiceCode: generateSixDigitNumber(),
       customer: customer._id,
       salesStaff: req.session.idUser,
       receiveMoney: req.body.receiveMoney,
       excessMoney: req.body.moneyBack,
+      totalMoney: req.body.totalMoney,
+      quantity: req.body.quantity,
     });
 
     // Use Promise.all for concurrent operations
@@ -355,7 +359,7 @@ const createInvoice = async (req, res) => {
       listItems.map(async (i) => {
         const itemNew = new InvoiceItem({
           invoice: invoice._id,
-          product: i._id,
+          product: i.idProduct,
           quantity: i.quantity,
           unitPrice: i.totalMoney,
         });
@@ -532,7 +536,7 @@ const changePassword = async (req, res) => {
       Common.createResponseModel(
         400,
         "Mật khẩu cũ hiện tại không đúng, vui lòng thử lại",
-        error
+        false
       )
     );
   }
@@ -639,6 +643,90 @@ const getInfoCart = async (req, res) => {
   }
 };
 
+const getStatistical = async (req, res) => {
+  const listInvoices = await Invoice.find();
+  const listUser = await User.find({
+    isDeleted: false,
+    role: { $ne: "admin" },
+  });
+  let totalMoney = 0;
+  let totalQuantity = 0;
+  listInvoices.forEach((e) => {
+    totalMoney += e.totalMoney;
+    totalQuantity += e.quantity;
+  });
+
+  const data = {
+    money: totalMoney,
+    quantity: totalQuantity,
+    invoiceNumber: listInvoices.length,
+    userNumber: listUser.length,
+  };
+
+  return res.json(Common.createSuccessResponseModel(1, data));
+};
+
+const getStatisticalByDate = async (req, res) => {
+  try {
+    const fromDate = new Date(req.body.fromDate);
+    const toDate = new Date(req.body.toDate);
+    console.log(fromDate, toDate);
+    const invoices = await Invoice.find({
+      createdAt: {
+        $gte: fromDate,
+        $lte: toDate,
+      },
+    });
+
+    const invoicesWithDetails = [];
+    for (const invoice of invoices) {
+      const employee = await User.findById(invoice.salesStaff);
+      const customer = await Customer.findById(invoice.customer);
+
+      const invoiceWithDetail = {
+        ...invoice.toObject(),
+        employeeName: employee.fullName,
+        customerName: customer.fullName,
+      };
+      invoicesWithDetails.push(invoiceWithDetail);
+    }
+    return res.json(
+      Common.createSuccessResponseModel(
+        invoicesWithDetails.length ?? 0,
+        invoicesWithDetails ?? null
+      )
+    );
+  } catch (error) {
+    console.log(error);
+    return res.json(Common.createResponseModel(500, "Vui lòng thử lại."));
+  }
+};
+
+const getDetailInvoices = async (req, res) => {
+  try {
+    const invoice = await Invoice.findOne({ invoiceCode: req.params.id });
+    //find item in invoice
+    const items = await InvoiceItem.find({ invoice: invoice._id });
+    const result = [];
+    for (const item of items) {
+      console.log(item);
+      const product = await Model.Products.findOne({ _id: item.product });
+      const s = {
+        ...item.toObject(),
+        productName: product.name,
+      };
+      result.push(s);
+    }
+    console.log(result);
+    return res.json(
+      Common.createSuccessResponseModel(result.length ?? 0, result ?? null)
+    );
+  } catch (error) {
+    console.log(error);
+    return res.json(Common.createResponseModel(500, "Vui lòng thử lại."));
+  }
+};
+
 //hàm random barcode
 const generateSixDigitNumber = () => {
   // Tạo số ngẫu nhiên từ 100000 đến 999999 (bao gồm cả hai đầu)
@@ -691,4 +779,7 @@ module.exports = {
   updateQuantity: updateQuantity,
   deleteItemInCart: deleteItemInCart,
   getInfoCart: getInfoCart,
+  getStatistical: getStatistical,
+  getStatisticalByDate: getStatisticalByDate,
+  getDetailInvoices: getDetailInvoices,
 };

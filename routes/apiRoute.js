@@ -56,4 +56,14 @@ routes.post("/users/change-password", apiController.changePassword);
 //cart
 routes.get("/carts/get-info-cart", apiController.getInfoCart);
 
+//thống kê
+routes.get("/statistical/get-data", apiController.getStatistical);
+routes.post(
+  "/statistical/get-data-by-date",
+  apiController.getStatisticalByDate
+);
+
+//đơn hàng
+routes.get("/invoices/get-detail/:id", apiController.getDetailInvoices);
+
 module.exports = routes;
