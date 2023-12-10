@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Invoice</title>
+		<!-- Latest compiled and minified CSS -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		/>
+
+		<!-- jQuery library -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+		></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+		></script>
+		<style>
+			main { margin-top: 30px; } * { font-size: 18px; } .add-on { margin-top:
+			50px; border-top: 1px solid black; font-size: 10px; font-style: italic; }
+			.add-on .innner { margin-top: 20px; }
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Thông tin hóa đơn</h1>
+			<main>
+				<p>Mã hóa đơn: {{invoiceCode}}</p>
+				<p>Khách hàng: {{customerName}}</p>
+				<p>Nhân viên: {{salesStaffName}}</p>
+				<p>Ngày tạo: {{createdAt}}</p>
+				<p>Tổng tiền: {{totalPrice}}</p>
+				<p>Tổng số hàng: {{totalProducts}}</p>
+				<p>Số tiền nhận: {{receiveMoney}}</p>
+				<p>Số tiền thừa: {{excessMoney}}</p>
+				<p>Sản phẩm:</p>
+				<div class="review-chosen-items-group">
+					<table class="table" id="products">
+						<thead>
+							<tr>
+								<th>Số thứ tự</th>
+								<th>Tến sản phẩm</th>
+								<th>Cấu hình</th>
+								<th>Giá bán</th>
+								<th>Số lượng</th>
+								<th>Tổng</th>
+							</tr>
+						</thead>
+						<tbody
+							class="tbody table-border-bottom-0"
+							id="product-items-chosen-view-only"
+						>
+							{{#each products}}
+								<tr>
+									<td>
+										<i
+											class="bar-code fab fa-angular fa-lg text-danger me-3"
+										></i>
+										<strong class="bar-code">{{@index}}</strong>
+									</td>
+									<td class="name">{{this.unitPrice}}</td>
+									<td class="config">ROM:
+										{{this.unitPrice}}
+										GB, RAM:
+										{{this.unitPrice}}
+										GB</td>
+									<td class="sale-price">
+										{{this.unitPrice}}
+									</td>
+									<td>{{quantity}}</td>
+									<td>
+										{{this.unitPrice}}
+									</td>
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+				<div class="add-on">
+					<div class="innner">
+						<p>Giá ở trên đã bao gồm VAT</p>
+						<p>Mọi thắc mắc, khiếu nại xin vui lòng liên hệ: 19000000</p>
+						<p>Website: http://localhost:3000</p>
+					</div>
+				</div>
+				<!-- Add invoice details and items here -->
+			</main>
+		</div>
+	</body>
+</html>

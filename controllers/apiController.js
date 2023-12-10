@@ -1,5 +1,9 @@
 const multer = require("multer");
+const fs = require("fs");
 const bcrypt = require("bcrypt");
+const puppeteer = require("puppeteer");
+const handlebars = require("handlebars");
+const path = require("path");
 
 const Mail = require("../common/sendMail");
 const Common = require("../common/Common");
@@ -302,7 +306,7 @@ const getCustomerInvoiceDetail = async (req, res) => {
 	}
 };
 
-const createInvoice = async (req, res) => {
+const createInvoice = async (req, res, next) => {
 	try {
 		let customer = await Customer.findOne({
 			phoneNumber: req.body.phoneNumber,
@@ -353,7 +357,8 @@ const createInvoice = async (req, res) => {
 			})
 		);
 
-		return res.json(Common.createSuccessResponseModel(invoice));
+		req.invoiceCode = invoice.invoiceCode;
+		next();
 	} catch (error) {
 		console.error("Error:", error);
 		return res.json(
@@ -503,13 +508,98 @@ function generateInvoiceCode() {
 	const dateString = `${month}${day}${year}`;
 
 	// Get current timestamp and take the first 4 characters
-	const timestamp = String(currentDate.getTime()).slice(0, 4);
+	const timestamp = String(currentDate.getTime()).slice(-4);
 
 	// Combine the date string and timestamp
 	const resultString = dateString + timestamp;
+	console.log(resultString);
 
 	return resultString;
 }
+
+const generateInvoicePdf = async (req, res) => {
+	const invoice = await Invoice.findOne({
+		invoiceCode: req.invoiceCode,
+	})
+		.populate("customer", "fullName")
+		.populate("salesStaff", "fullName");
+	console.log(invoice, req.invoiceCode);
+
+	const invoiceObj = invoice.toObject();
+	const invoiceItems = await InvoiceItem.find({
+		invoice: invoice._id,
+	})
+		.populate("product", "name ram rom")
+		.lean();
+
+	invoiceObj.products = invoiceItems;
+	invoiceObj.totalPrice = 0;
+	invoiceObj.totalProducts = 0;
+
+	invoiceItems.forEach((item) => {
+		invoiceObj.totalPrice += item.unitPrice * item.quantity;
+		invoiceObj.totalProducts += item.quantity;
+		item.unitPrice = Number(item.unitPrice).toLocaleString("vi", {
+			style: "currency",
+			currency: "VND",
+		});
+		item.totalProductPrice = Number(
+			item.unitPrice * item.quantity
+		).toLocaleString("vi", {
+			style: "currency",
+			currency: "VND",
+		});
+	});
+
+	invoiceObj.totalPrice = Number(invoiceObj.totalPrice).toLocaleString("vi", {
+		style: "currency",
+		currency: "VND",
+	});
+
+	const invoiceCode = req.invoiceCode;
+	const templateHtml = fs.readFileSync(
+		path.join(__dirname, "../views/pdf.handlebars"),
+		"utf8"
+	);
+
+	const template = handlebars.compile(templateHtml);
+	const data = {
+		invoiceCode,
+		customerName: invoiceObj.customer.fullName,
+		salesStaffName: invoiceObj.salesStaff.fullName,
+		createdAt: new Date(invoiceObj.createdAt).toLocaleDateString("vi-VN"),
+		totalPrice: invoiceObj.totalPrice,
+		totalProducts: invoiceObj.totalProducts,
+		receiveMoney: invoiceObj.receiveMoney,
+		excessMoney: invoiceObj.excessMoney,
+		products: invoiceObj.products,
+	};
+
+	const html = template(data);
+
+	(async () => {
+		const browser = await puppeteer.launch();
+		const page = await browser.newPage();
+
+		// Set the HTML content of the page
+		await page.setContent(html);
+
+		// Generate the PDF
+		const outputPath = "invoices/invoice_" + invoiceCode + ".pdf";
+		await page.pdf({ path: "./public/" + outputPath, format: "A4" });
+
+		await browser.close();
+
+		console.log("PDF created successfully");
+		const downloadLink = `${req.protocol}://${req.get("host")}/` + outputPath;
+		return res.json(
+			Common.createSuccessResponseModel(0, {
+				downloadLink,
+				invoiceCode,
+			})
+		);
+	})();
+};
 
 module.exports = {
 	getAllProducts: getAllProducts,
@@ -529,4 +619,5 @@ module.exports = {
 	changePassword: changePassword,
 	createInvoice: createInvoice,
 	getProductByBarcode: getProductByBarcode,
+	generateInvoicePdf: generateInvoicePdf,
 };

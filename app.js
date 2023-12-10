@@ -9,13 +9,13 @@ const app = express();
 
 //middleware
 app.engine(
-  "handlebars",
-  exphbs.engine({
-    defaultLayout: false,
-    helpers: {
-      isSuccessEq3: helpers.isSuccessEq3,
-    },
-  })
+	"handlebars",
+	exphbs.engine({
+		defaultLayout: false,
+		helpers: {
+			isSuccessEq3: helpers.isSuccessEq3,
+		},
+	})
 );
 app.set("view engine", "handlebars");
 app.use(express.static("public"));
@@ -23,15 +23,15 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
-  session({
-    secret: "my-key",
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      secure: false,
-      maxAge: 60 * 60 * 24 * 1000,
-    },
-  })
+	session({
+		secret: "my-key",
+		resave: true,
+		saveUninitialized: true,
+		cookie: {
+			secure: false,
+			maxAge: 60 * 60 * 24 * 1000,
+		},
+	})
 );
 app.use(cookieParser());
 
@@ -49,5 +49,5 @@ app.use("/auth", authRoute);
 app.use("/admin", adminRoute);
 
 app.listen(port, () => {
-  console.log(`Server running on: http://localhost:${port}`);
+	console.log(`Server running on: http://localhost:${port}`);
 });

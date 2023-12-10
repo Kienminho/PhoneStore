@@ -2,103 +2,6 @@
 <div class="content-wrapper">
 	<!-- Content -->
 
-	<nav
-		class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-		id="layout-navbar"
-	>
-		<div
-			class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"
-		>
-			<a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-				<i class="bx bx-menu bx-sm"></i>
-			</a>
-		</div>
-
-		<div
-			class="navbar-nav-right d-flex align-items-center"
-			id="navbar-collapse"
-		>
-			<!-- Search -->
-
-			<ul class="navbar-nav flex-row align-items-center ms-auto">
-				<!-- Place this tag where you want the button to render. -->
-				<!-- User -->
-				<li class="nav-item navbar-dropdown dropdown-user dropdown">
-					<a
-						class="nav-link dropdown-toggle hide-arrow"
-						href="javascript:void(0);"
-						data-bs-toggle="dropdown"
-					>
-						<div class="avatar avatar-online">
-							<img
-								src="../assets/img/avatars/1.png"
-								alt
-								class="w-px-40 h-auto rounded-circle"
-							/>
-						</div>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<li>
-							<a class="dropdown-item" href="#">
-								<div class="d-flex">
-									<div class="flex-shrink-0 me-3">
-										<div class="avatar avatar-online">
-											<img
-												src="../assets/img/avatars/1.png"
-												alt
-												class="w-px-40 h-auto rounded-circle"
-											/>
-										</div>
-									</div>
-									<div class="flex-grow-1">
-										<span class="fw-semibold d-block">John Doe</span>
-										<small class="text-muted">Admin</small>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<div class="dropdown-divider"></div>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">
-								<i class="bx bx-user me-2"></i>
-								<span class="align-middle">My Profile</span>
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">
-								<i class="bx bx-cog me-2"></i>
-								<span class="align-middle">Settings</span>
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">
-								<span class="d-flex align-items-center align-middle">
-									<i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-									<span class="flex-grow-1 align-middle">Billing</span>
-									<span
-										class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20"
-									>4</span>
-								</span>
-							</a>
-						</li>
-						<li>
-							<div class="dropdown-divider"></div>
-						</li>
-						<li>
-							<a class="dropdown-item" href="auth-login-basic.html">
-								<i class="bx bx-power-off me-2"></i>
-								<span class="align-middle">Log Out</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<!--/ User -->
-			</ul>
-		</div>
-	</nav>
-
 	<!-- / Navbar -->
 
 	<!-- Content wrapper -->
@@ -113,17 +16,18 @@
 			<!-- Basic Bootstrap Table -->
 			<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
 
-				<form data-multi-step>
-					<div class="card card-step active" data-step-1>
+				<form data-multi-step id="main-form">
+					<div class="card card-step active" data-step-1 id="add-product">
 						<h5 class="card-title">Nhập sản phẩm</h5>
-						<div class="row">
+						<div class="row payment-wrapper">
 							<div class="col">
-								<h5>Sản phẩm</h5>
-								<div class="form-group">
-									<label for="">Nhập barcode</label>
+								<h5 class="product-input-heading">Sản phẩm</h5>
+								<div class="form-group search-barcode-group">
+									<label for="search-barcode" class="search-barcode-label">Nhập
+										barcode</label>
 									<input type="text" id="search-barcode" />
 								</div>
-								<table class="table" id="products">
+								<table class="table" id="products-page">
 									<thead>
 										<tr>
 											<th>Mã sản phẩm</th>
@@ -138,9 +42,8 @@
 								</table>
 							</div>
 							<div class="col">
-								<h5>Sản phẩm đã chọn</h5>
-								<input type="hidden" name="" />
-								<table class="table" id="products">
+								<h5 class="chosen-wrapper-heading">Sản phẩm đã chọn</h5>
+								<table class="table chosen-wrapper" id="products">
 									<thead>
 										<tr>
 											<th>Mã sản phẩm</th>
@@ -156,129 +59,15 @@
 									>
 									</tbody>
 								</table>
-								<p>Tổng tiền: <span id="total-chosen-price">0</span></p>
-								<button type="button" id="move-to-next" disabled>Tiếp theo</button>
-							</div>
-							<button type="button">Tiếp theo</button>
-						</div>
-					</div>
-					<div class="card card-step" data-step>
-						<h5 class="card-title">Checkout</h5>
-						<form id="form-checkout">
-							<div class="mb-3">
-								<div class="form-group">
-									<label
-										style="padding-bottom:8px; margin-left: 24px;"
-										for="customer-phone-number"
-									>Số điện thoại khách hàng</label>
-									<input
-										style="margin-left: auto; margin-right: auto; width: 96%"
-										class="form-control"
-										type="text"
-										placeholder="Số điện thoại"
-										id="customer-phone-number"
-										name="customer-phone-number"
-										onblur="getCustomerProfile()"
-										onchange="handlePhoneNumberInputOnchange()"
-									/>
+								<div class="first-tab-footer">
+									<p>Tổng tiền: <span id="total-chosen-price">0</span></p>
+									<a href="#customer-info" type="button" id="move-to-next">Tiếp
+										theo</a>
 								</div>
 							</div>
-							<div class="mb-3">
-								<div class="form-group">
-									<label
-										style="padding-bottom:8px; margin-left: 24px;"
-										for="customer-name"
-									>Tên khách hàng</label>
-									<input
-										style="margin-left: auto; margin-right: auto; width: 96%"
-										class="form-control"
-										type="text"
-										placeholder="Tên khách hàng"
-										id="customer-name"
-										name="customer-name"
-										oninput="handleOnBlur()"
-									/>
-								</div>
-							</div>
-							<div class="mb-3">
-								<div class="form-group">
-									<label
-										style="padding-bottom:8px; margin-left: 24px;"
-										for="customer-address"
-									>Địa chỉ</label>
-									<input
-										style="margin-left: auto; margin-right: auto; width: 96%"
-										class="form-control"
-										type="text"
-										placeholder="Địa chỉ"
-										id="customer-address"
-										name="customer-address"
-										oninput="handleOnBlur()"
-									/>
-								</div>
-							</div>
-						</form>
-
-						<div class="text-nowrap" id="purchase-history">
-							<h5 class="card-title">Lịch sử mua hàng</h5>
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Mã hóa đơn</th>
-										<th>Tên khách hàng</th>
-										<th>Tổng số hàng</th>
-
-										<th>Tổng tiền</th>
-										<th>Số tiền nhận</th>
-										<th>Số tiền thừa</th>
-										<th>Nhân viên</th>
-										<th>Thời gian</th>
-									</tr>
-								</thead>
-								<tbody
-									class="tbody table-border-bottom-0"
-									id="purchase-history-items"
-								>
-								</tbody>
-							</table>
-						</div>
-						<div>
-							<button type="button">Trước</button>
-							<button type="button" id="move-to-next-2" disabled>Tiếp theo</button>
 						</div>
 					</div>
-					<div class="card card-step" data-step-3>
-						<form id="form-checkout-view-only">
-						</form>
 
-						<h5>Sản phẩm đã chọn</h5>
-						<input type="hidden" name="" />
-						<table class="table" id="products">
-							<thead>
-								<tr>
-									<th>Mã sản phẩm</th>
-									<th>Tến sản phẩm</th>
-									<th>Hình ảnh</th>
-									<th>Cấu hình</th>
-									<th>Giá bán</th>
-									<th>Số lượng</th>
-									<th>Tổng</th>
-								</tr>
-							</thead>
-							<tbody
-								class="tbody table-border-bottom-0"
-								id="product-items-chosen-view-only"
-							>
-							</tbody>
-						</table>
-						<p>Tổng tiền: <span id="total-chosen-price-view-only">0</span></p>
-						<button type="button">Trước</button>
-						<button type="button" id="confirm-payment" disabled>Thanh toán</button>
-					</div>
-					<div class="card card-step" data-step-4>
-						<h5 class="card-title">Thành công</h5>
-						<button type="button">Submit</button>
-					</div>
 				</form>
 
 			</div>
@@ -321,7 +110,6 @@
 <!-- / Footer -->
 
 <div class="content-backdrop fade"></div>
-</div>
 
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
 	<div
@@ -466,4 +254,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/checkout.js"></script>
+</div>
+<script src="/js/checkout.js"></script>

@@ -19,19 +19,18 @@ function fetchData() {
 
 function handleOnBlur() {
 	if (
-		customerName.val().trim().length === 0 ||
-		customerPhoneNumber.val().trim().length === 0 ||
-		customerAddress.val().trim().length === 0
+		$("#customer-name").val().trim().length === 0 ||
+		$("#customer-phone-number").val().trim().length === 0 ||
+		$("#customer-address").val().trim().length === 0
 	) {
 		$("#move-to-next-2").prop("disabled", true);
 	} else {
 		$("#move-to-next-2").prop("disabled", false);
+		$("#move-to-next-2").click(function () {
+			displayChosenItemsForViewOnly(chosenItems);
+		});
 	}
 }
-
-$("#move-to-next-2").click(function () {
-	displayChosenItemsForViewOnly(chosenItems);
-});
 
 function debounce(func, delay) {
 	let timeoutId;
@@ -74,19 +73,21 @@ function getProductByBarcode(barcode) {
 
 //thêm sản phẩm
 function getCustomerProfile() {
-	if (validateData(customerPhoneNumber.val().trim())) {
+	if (validateData($("#customer-phone-number").val().trim())) {
 		$.ajax({
 			url: "/api/customer/get-profile",
 			contentType: "application/json",
 			method: "POST",
-			data: JSON.stringify({ phoneNumber: customerPhoneNumber.val().trim() }),
+			data: JSON.stringify({
+				phoneNumber: $("#customer-phone-number").val().trim(),
+			}),
 			success: function (data) {
 				// Handle success
 				if (data.statusCode === 200) {
-					customerName.val(data.data.fullName);
-					customerAddress.val(data.data.address);
-					customerName.prop("disabled", true);
-					customerAddress.prop("disabled", true);
+					$("#customer-name").val(data.data.fullName);
+					$("#customer-address").val(data.data.address);
+					$("#customer-name").prop("disabled", true);
+					$("#customer-address").prop("disabled", true);
 					getPurchaseHistory(data.data._id);
 					handleOnBlur();
 				}
@@ -156,10 +157,10 @@ function displayInvoiceDetail(data) {
 }
 
 function handlePhoneNumberInputOnchange() {
-	customerName.val("");
-	customerAddress.val("");
-	customerName.prop("disabled", false);
-	customerAddress.prop("disabled", false);
+	$("#customer-name").val("");
+	$("#customer-address").val("");
+	$("#customer-name").prop("disabled", false);
+	$("#customer-address").prop("disabled", false);
 	displayPurchaseHistory([]);
 }
 
@@ -193,7 +194,7 @@ function displayInvoiceItems(invoiceItems) {
 }
 
 function displayPurchaseHistory(arr) {
-	tbodyPurchaseHistory.empty();
+	$("tbody#purchase-history-items").empty();
 	if (!Array.isArray(arr) || arr.length === 0) {
 		if (isNewCustomer) {
 			$("#purchase-history").hide();
@@ -234,7 +235,7 @@ function displayPurchaseHistory(arr) {
     <td>${new Date(p.updatedAt).toLocaleDateString("vi-VN")}</td>
   </tr>`;
 
-		tbodyPurchaseHistory.append(html);
+		$("tbody#purchase-history-items").append(html);
 		$("#purchase-history").show();
 		$("td.invoice-code").on("click", function () {
 			const invoiceId = $(this).data("invoice-id");
@@ -282,6 +283,45 @@ function isValidPhoneNumber(phoneNumber) {
 }
 
 function displayChosenItemsForViewOnly(items) {
+	if ($("#payment-scr").length === 0) {
+		$("#main-form")
+			.append(`<div class="card card-step need-to-move" id="payment-scr" data-step-3>
+	<h5 class="card-title">Thanh toán</h5>
+	<form id="form-checkout-view-only">
+	</form>
+
+	<div class="review-chosen-items-group">
+		<h5 class="review-chosen-items-heading">Sản phẩm đã chọn</h5>
+		<input type="hidden" name="" />
+		<table class="table" id="products">
+			<thead>
+				<tr>
+					<th>Mã sản phẩm</th>
+					<th>Tên sản phẩm</th>
+					<th>Hình ảnh</th>
+					<th>Cấu hình</th>
+					<th>Giá bán</th>
+					<th>Số lượng</th>
+					<th>Tổng</th>
+				</tr>
+			</thead>
+			<tbody
+				class="tbody table-border-bottom-0"
+				id="product-items-chosen-view-only"
+			>
+			</tbody>
+		</table>
+		<p class="review-total-price">Tổng tiền:
+			<span id="total-chosen-price-view-only">0</span></p>
+		<div class="review-chosen-items-action">
+
+			<a href="#customer-info" class="confirm-prev" type="button">Trước</a>
+			<button type="button" id="confirm-payment" disabled>Thanh toán</button>
+		</div>
+	</div>
+</div>`);
+	}
+	console.log($("#payment-scr"));
 	const tbody = $("tbody#product-items-chosen-view-only");
 	let totalPrice = 0;
 	tbody.empty();
@@ -328,6 +368,7 @@ function displayChosenItemsForViewOnly(items) {
 		totalPrice += p.priceSale * p.quantity;
 	});
 
+	console.log(tbody);
 	$("#form-checkout-view-only").empty();
 	$("#form-checkout-view-only").append(`<div class="mb-3">
 		<label
@@ -340,7 +381,7 @@ function displayChosenItemsForViewOnly(items) {
 			type="text"
 			id="customer-name"
 			name="fullName"
-			value="${customerName.val()}"
+			value="${$("#customer-name").val()}"
 			disabled
 		/>
 	</div>
@@ -355,7 +396,7 @@ function displayChosenItemsForViewOnly(items) {
 			type="text"
 			id="customer-address"
 			name="address"
-			value="${customerAddress.val()}"
+			value="${$("#customer-address").val()}"
 			disabled
 		/>
 	</div>
@@ -370,7 +411,7 @@ function displayChosenItemsForViewOnly(items) {
 			type="text"
 			value="0898228317"
 			id="customer-phone-number"
-			name="${customerPhoneNumber.val()}"
+			name="${$("#customer-phone-number").val()}"
 			disabled
 		/>
 	</div>
@@ -432,9 +473,9 @@ function displayChosenItemsForViewOnly(items) {
 					contentType: "application/json",
 					method: "POST",
 					data: JSON.stringify({
-						phoneNumber: customerPhoneNumber.val(),
-						fullName: customerName.val(),
-						address: customerAddress.val(),
+						phoneNumber: $("#customer-phone-number").val(),
+						fullName: $("#customer-name").val(),
+						address: $("#customer-address").val(),
 						invoiceItems: chosenItems.map((item) => ({
 							productId: item._id,
 							quantity: item.quantity,
@@ -444,6 +485,16 @@ function displayChosenItemsForViewOnly(items) {
 					success: function (data) {
 						// Handle success
 						if (data.statusCode === 200) {
+							$("#main-form").empty();
+							$("#form-checkout-view-only").empty();
+							$(".need-to-move").remove();
+							$("#main-form")
+								.append(`<div class="card card-step card-step-success" data-step-4><h5 class="card-title">Thành công</h5>
+							<p class="review-invoice">Cảm ơn bạn đã sử dụng dịch vụ của chúng
+								tôi!<br />Mã hóa đơn:
+								<a id="invoice-pdf" target="_blank"></a></p><br/><a id="back-to-checkout" href="/checkout">Tạo giao dịch mới</a></div>`);
+							$("#invoice-pdf").text(data.data.invoiceCode);
+							$("#invoice-pdf").attr("href", data.data.downloadLink);
 							showToast("Thanh toán thành công", true);
 						}
 					},
@@ -483,17 +534,17 @@ function displayChosenItems(items) {
 			style: "currency",
 			currency: "VND",
 		})}</td>
-		  <td>${p.quantity}</td>
+		  <td class="item-action-wrapper"><button class="item-action-add" type="button" onClick={addProductToChosenList("${
+				p._id
+			}")}>+</button>${
+			p.quantity
+		}<button class="item-action-remove" type="button" onClick={removeProductFromChosenList("${
+			p._id
+		}")}>-</button></td>
 		  <td>${Number(p.priceSale * p.quantity).toLocaleString("vi", {
 				style: "currency",
 				currency: "VND",
 			})}</td>
-			<td>
-				<button type="button" onClick={addProductToChosenList("${p._id}")}>+</button>
-				<button type="button" onClick={removeProductFromChosenList("${
-					p._id
-				}")}>-</button>
-			</td>
 	  </tr>`;
 		tbody.append(html);
 		totalPrice += p.priceSale * p.quantity;
@@ -506,8 +557,108 @@ function displayChosenItems(items) {
 		})
 	);
 	if (chosenItems.length > 0) {
-		console.log($("#move-to-next"));
 		$("#move-to-next").prop("disabled", false);
+		if ($("#customer-info").length === 0) {
+			$("#main-form")
+				.append(`<div class="card card-step" data-step id="customer-info">
+		<h5 class="card-title">Thông tin khách hàng</h5>
+		<form id="form-checkout">
+			<div class="mb-3 customer-data-group">
+				<div class="form-group">
+					<label
+						style="padding-bottom:8px; margin-left: 24px;"
+						for="customer-phone-number"
+						class="customer-data-label"
+					>Số điện thoại khách hàng</label>
+					<input
+						style="margin-left: auto; margin-right: auto; width: 96%"
+						class="form-control"
+						type="text"
+						placeholder="Số điện thoại"
+						id="customer-phone-number"
+						name="customer-phone-number"
+						onblur="getCustomerProfile()"
+						onchange="handlePhoneNumberInputOnchange()"
+					/>
+				</div>
+			</div>
+			<div class="mb-3 customer-data-group">
+				<div class="form-group">
+					<label
+						style="padding-bottom:8px; margin-left: 24px;"
+						for="customer-name"
+						class="customer-data-label"
+					>Tên khách hàng</label>
+					<input
+						style="margin-left: auto; margin-right: auto; width: 96%"
+						class="form-control"
+						type="text"
+						placeholder="Tên khách hàng"
+						id="customer-name"
+						name="customer-name"
+						oninput="handleOnBlur()"
+					/>
+				</div>
+			</div>
+			<div class="mb-3 customer-data-group">
+				<div class="form-group">
+					<label
+						style="padding-bottom:8px; margin-left: 24px;"
+						for="customer-address"
+						class="customer-data-label"
+					>Địa chỉ</label>
+					<input
+						style="margin-left: auto; margin-right: auto; width: 96%"
+						class="form-control"
+						type="text"
+						placeholder="Địa chỉ"
+						id="customer-address"
+						name="customer-address"
+						oninput="handleOnBlur()"
+					/>
+				</div>
+			</div>
+		</form>
+
+		<div class="text-nowrap" id="purchase-history">
+			<h5 class="card-title">Lịch sử mua hàng</h5>
+			<table class="table history-table">
+				<thead>
+					<tr>
+						<th>Mã hóa đơn</th>
+						<th>Tên khách hàng</th>
+						<th>Tổng số hàng</th>
+
+						<th>Tổng tiền</th>
+						<th>Số tiền nhận</th>
+						<th>Số tiền thừa</th>
+						<th>Nhân viên</th>
+						<th>Thời gian</th>
+					</tr>
+				</thead>
+				<tbody
+					class="tbody table-border-bottom-0"
+					id="purchase-history-items"
+				>
+				</tbody>
+			</table>
+		</div>
+		<div class="btn-group">
+			<a type="button" class="btn-prev" href="#add-product">Trước</a>
+			<a
+				type="button"
+				id="move-to-next-2"
+				class="btn-next"
+				disabled
+			>Tiếp theo</a>
+		</div>
+	</div>`);
+		}
+		$("#move-to-next").click(function () {
+			if (chosenItems.length === 0) {
+				return false;
+			}
+		});
 	} else {
 		$("#move-to-next").prop("disabled", true);
 	}
