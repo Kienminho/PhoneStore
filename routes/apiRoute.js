@@ -22,10 +22,15 @@ routes.post(
 );
 routes.delete("/products/delete/:id", apiController.deleteProduct);
 routes.put(
-  "/products/update-product",
-  apiController.upload.single("productImageUpdate"),
-  apiController.updateProduct
+	"/products/update-product",
+	apiController.upload.single("productImageUpdate"),
+	apiController.updateProduct
 );
+routes.get(
+	"/products/get-product-by-barcode/:barcode",
+	apiController.getProductByBarcode
+);
+routes.post("/invoices", apiController.createInvoice);
 
 // user
 routes.get("/users/get-all-user", apiController.getAllUser);
