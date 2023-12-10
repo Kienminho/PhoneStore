@@ -60,6 +60,7 @@ const handleLogin = async (req, res) => {
   if (match) {
     // khởi tạo session và cookie
     req.session.fullName = existUser.fullName;
+    req.session.idUser = existUser._id;
     res.cookie("fullname", existUser.fullName);
     res.cookie("permission", existUser.role);
     req.session.isLogin = true;

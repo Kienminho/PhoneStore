@@ -1,0 +1,17 @@
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Thanh toán thành công</h4>
+        <p>Thanh toán thành công với mã hoá đơn là <a href="{{downloadLink}}">{{id}}</a></p>
+        <button onclick="continueProcess()">Tiếp tục</button>
+    </div>
+    <!-- / Content -->
+</div>
+
+<script>
+    function continueProcess() {
+        window.location = "/payment"
+    }
+</script>
