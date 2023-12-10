@@ -114,7 +114,9 @@ function displayData(arr) {
   arr.map((i, index) => {
     let html = `<tr>
     <td class="id d-none">${i._id}</td>
-    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${index}</strong></td>
+    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${
+      index + 1
+    }</strong></td>
     <td class="name">${i.fullName}</td>
     <td class="email">${i.email}</td>
     <td class="address">${i.address}</td>

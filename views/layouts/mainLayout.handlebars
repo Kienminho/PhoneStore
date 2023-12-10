@@ -68,7 +68,7 @@
       var activeIndex = localStorage.getItem('activeIndex');
 
       // Set the initial active class based on the retrieved index
-      if (activeIndex !== null) {
+      if (activeIndex !== null && menuItems[activeIndex]) {
         menuItems[activeIndex].classList.add('active');
       }
 
@@ -77,23 +77,27 @@
           // Prevent the default page transition
           event.preventDefault();
 
-          // Remove the 'active' class from all menu items
-          menuItems.forEach(function (otherItem) {
-            otherItem.classList.remove('active');
-          });
+          // Check if item is defined
+          if (item) {
+            // Remove the 'active' class from all menu items
+            menuItems.forEach(function (otherItem) {
+              otherItem.classList.remove('active');
+            });
 
-          // Add the 'active' class to the clicked menu item
-          item.classList.add('active');
+            // Add the 'active' class to the clicked menu item
+            item.classList.add('active');
 
-          // Save the active index to localStorage
-          localStorage.setItem('activeIndex', index);
+            // Save the active index to localStorage
+            localStorage.setItem('activeIndex', index);
 
-          // Get the href attribute and navigate to the URL
-          var href = item.querySelector('a').getAttribute('href');
-          window.location.href = href;
+            // Get the href attribute and navigate to the URL
+            var href = item.querySelector('a').getAttribute('href');
+            window.location.href = href;
+          }
         });
       });
     });
+
   </script>
 </head>
 
@@ -215,9 +219,9 @@
             <!-- Search -->
             <div class="navbar-nav align-items-center">
               <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
+                {{!-- <i class="bx bx-search fs-4 lh-0"></i>
                 <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                  aria-label="Search..." />
+                  aria-label="Search..." /> --}}
               </div>
             </div>
             <!-- /Search -->
