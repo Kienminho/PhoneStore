@@ -5,7 +5,7 @@ const categorySchema = new mongoose.Schema({
 });
 
 const productSchema = new mongoose.Schema({
-  barCode: { type: Number, required: true },
+  barCode: { type: String, required: true },
   name: { type: String, required: true },
   screenSize: { type: String, required: true },
   ram: { type: String, required: true },

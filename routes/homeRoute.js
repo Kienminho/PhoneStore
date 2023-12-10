@@ -15,5 +15,12 @@ routes.get(
   authController.checkLoggedIn,
   homeController.renderInfo
 );
+routes.get(
+  "/payment",
+  authController.checkLoggedIn,
+  homeController.renderPayment
+);
+
+routes.get("/pay-success/:id", homeController.successPayment);
 
 module.exports = routes;
