@@ -61,43 +61,6 @@
         console.log(err);
       });
 
-    document.addEventListener('DOMContentLoaded', function () {
-      var menuItems = document.querySelectorAll('.menu-item');
-
-      // Retrieve the active index from localStorage
-      var activeIndex = localStorage.getItem('activeIndex');
-
-      // Set the initial active class based on the retrieved index
-      if (activeIndex !== null && menuItems[activeIndex]) {
-        menuItems[activeIndex].classList.add('active');
-      }
-
-      menuItems.forEach(function (item, index) {
-        item.addEventListener('click', function (event) {
-          // Prevent the default page transition
-          event.preventDefault();
-
-          // Check if item is defined
-          if (item) {
-            // Remove the 'active' class from all menu items
-            menuItems.forEach(function (otherItem) {
-              otherItem.classList.remove('active');
-            });
-
-            // Add the 'active' class to the clicked menu item
-            item.classList.add('active');
-
-            // Save the active index to localStorage
-            localStorage.setItem('activeIndex', index);
-
-            // Get the href attribute and navigate to the URL
-            var href = item.querySelector('a').getAttribute('href');
-            window.location.href = href;
-          }
-        });
-      });
-    });
-
   </script>
 </head>
 
