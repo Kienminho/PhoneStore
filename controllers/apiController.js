@@ -12,8 +12,6 @@ const { Customer } = require("../models/Customer");
 const { Invoice, InvoiceItem } = require("../models/Invoice");
 const User = require("../models/Users");
 const Cart = require("../models/Carts");
-const mongoose = require("mongoose");
-const { log } = require("console");
 
 //setup folder save file
 const storage = multer.diskStorage({
