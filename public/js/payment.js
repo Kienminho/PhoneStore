@@ -251,6 +251,9 @@ function calcMoney() {
 }
 
 function handlePay() {
+  $(".btn-cancel").addClass("d-none");
+  $(".btn-payment").addClass("d-none");
+  $(".spinner").removeClass("d-none");
   const phoneNumber = $("#phone-number").val();
   const nameCustomer = $("#basic-default-fullname").val();
   const address = $("#address").val();
@@ -279,6 +282,9 @@ function handlePay() {
     .then((res) => {
       console.log(res);
       if (res.statusCode === 200) {
+        $(".btn-cancel").removeClass("d-none");
+        $(".btn-payment").removeClass("d-none");
+        $(".spinner").addClass("d-none");
         window.location = res.data.urlRedirect;
       } else {
         $("#offcanvasEnd").addClass("hide");

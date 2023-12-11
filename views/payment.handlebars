@@ -100,9 +100,16 @@
                         <input disabled type="text" id="money-back" class="form-control" />
                     </div>
                 </form>
-                <button type="button" onclick="handlePay()" class="btn btn-primary mb-2 d-grid w-100">Thanh
+                <div class="spinner d-none mb-3 d-flex flex-column justify-content-center align-items-center">
+                    <div class="spinner-border text-primary align-items-center" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+                <button type="button" onclick="handlePay()" class="btn-payment btn btn-primary mb-2 d-grid w-100">Thanh
                     toán</button>
-                <button type="button" class="btn btn-outline-secondary d-grid w-100" data-bs-dismiss="offcanvas">
+                <button type="button" class="btn-cancel btn btn-outline-secondary d-grid w-100"
+                    data-bs-dismiss="offcanvas">
                     Cancel
                 </button>
             </div>
