@@ -422,7 +422,6 @@ const createInvoice = async (req, res) => {
 const getAllUser = async (req, res) => {
   try {
     const listUser = await User.find({
-      isDeleted: false,
       role: { $ne: "admin" },
     });
     return res.json(
@@ -438,17 +437,17 @@ const getAllUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const isDeleted = await User.updateOne(
-    { _id: req.params.id },
-    {
-      $set: {
-        isDeleted: true,
-      },
+  try {
+    const user = await User.findById(req.params.id);
+    if (user.isDeleted) {
+      user.isDeleted = false;
+    } else {
+      user.isDeleted = true;
     }
-  );
-  if (isDeleted.modifiedCount > 0) {
+    user.save();
+
     return res.json(Common.createSuccessResponseModel(0, true));
-  }
+  } catch (error) {}
   return res.json(
     Common.createResponseModel(400, "Vui lòng thử lại sau.", false)
   );

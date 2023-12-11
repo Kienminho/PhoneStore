@@ -25,7 +25,6 @@ const handleLogin = async (req, res) => {
   console.log(req.body);
   const existUser = await User.findOne({
     username: username,
-    isDeleted: false,
   });
   console.log(existUser);
   if (!existUser || existUser === null || existUser.activated === false) {
@@ -57,6 +56,15 @@ const handleLogin = async (req, res) => {
   // so sánh mật khẩu
   const match = await bcrypt.compare(password, existUser.password);
   if (match) {
+    if (existUser.isDeleted) {
+      return res.json(
+        Common.createResponseModel(
+          404,
+          "Tài khoản đã bị khoá, vui lòng liên hệ admin.",
+          false
+        )
+      );
+    }
     // khởi tạo session và cookie
     req.session.fullName = existUser.fullName;
     req.session.idUser = existUser._id;

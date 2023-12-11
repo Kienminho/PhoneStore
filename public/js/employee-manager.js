@@ -81,7 +81,7 @@ function confirmDeleted() {
       if (res.statusCode === 200) {
         $(deletedModal).modal("hide");
         showToast(res.message, true);
-        $(tr).remove();
+        fetchData();
       } else {
         $(deletedModal).modal("hide");
         showToast(res.message, false);
@@ -125,7 +125,14 @@ function displayData(arr) {
         <span class="badge ${
           i.activated ? "bg-label-success" : "bg-label-danger"
         } me-1">
-            ${i.activated ? "Active" : "Inactive"}
+            ${i.activated ? "Đã kích hoạt" : "Chưa kích hoạt"}
+        </span>
+    </td>
+    <td>
+        <span class="badge ${
+          i.isDeleted ? "bg-label-success" : "bg-label-danger"
+        } me-1">
+            ${i.isDeleted ? "Hoạt đông" : "Khoá"}
         </span>
     </td>
     <td>
@@ -138,7 +145,9 @@ function displayData(arr) {
                 <a class="dropdown-item" href="javascript:void(0);" onclick="reactivateAccount(this)"><i
                         class="bx bx-edit-alt me-1"></i>Kích hoạt</a>
                 <a class="dropdown-item" href="javascript:void(0);" onclick="deletedProduct(this)"><i
-                        class="bx bx-trash me-1" ></i> Xoá</a>
+                        class="bx bx-trash me-1" ></i> ${
+                          i.isDeleted ? "Khoá" : "Mở khoá"
+                        }</a>
             </div>
         </div>
     </td>
