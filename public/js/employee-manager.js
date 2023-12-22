@@ -130,9 +130,9 @@ function displayData(arr) {
     </td>
     <td>
         <span class="badge ${
-          i.isDeleted ? "bg-label-success" : "bg-label-danger"
+          i.isDeleted ? "bg-label-danger" : "bg-label-success"
         } me-1">
-            ${i.isDeleted ? "Hoạt đông" : "Khoá"}
+            ${i.isDeleted ? "Đã khoá" : "Đang mở khoá"}
         </span>
     </td>
     <td>
@@ -146,7 +146,7 @@ function displayData(arr) {
                         class="bx bx-edit-alt me-1"></i>Kích hoạt</a>
                 <a class="dropdown-item" href="javascript:void(0);" onclick="deletedProduct(this)"><i
                         class="bx bx-trash me-1" ></i> ${
-                          i.isDeleted ? "Khoá" : "Mở khoá"
+                          i.isDeleted ? "Mở khoá" : "Khoá"
                         }</a>
             </div>
         </div>
