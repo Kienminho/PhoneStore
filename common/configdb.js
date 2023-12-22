@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 //kết nối đến MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/phone_store")
+  .connect(process.env.URL_DB)
   .then(() => {
     console.log("Mongoose Connected");
   })
